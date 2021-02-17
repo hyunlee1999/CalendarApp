@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
-from .forms import GroupForm
+from .forms import GroupForm, TodoListForm
 
 def index(request):
     num_Groups = Group.objects.all().count()
@@ -30,4 +30,14 @@ def makeNewGroup(request):
         form = GroupForm()
 
     return render(request, "makeNewGroup.html", {"form": form})
+
+def makeNewTodoList(request):
+    if request.method == "POST":
+        return HttpResponse("Dummy")
+
+    else:
+        form = TodoListForm()
+
+    return render(request, "makeNewTodoList.html", {"form": form})
+
     
