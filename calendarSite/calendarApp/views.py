@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
-from .forms import GroupForm, TodoListForm
+from .forms import GroupForm, TodoListForm, TodoItemForm
+
 
 def index(request):
     num_Groups = Group.objects.all().count()
@@ -37,11 +38,11 @@ def makeNewTodoList(request):
 
         if form.is_valid():
             newTodoList = TodoList()
-            parentGroup = Group.objects.get(name=form.cleaned_data["parentGroup"]) 
+            parentGroup = Group.objects.get(name=form.cleaned_data["parent"]) 
             newTodoList.group = parentGroup
             newTodoList.name = form.cleaned_data["name"]
             newTodoList.save()
-            return HttpResponse("You've created a new TodoList")
+            return HttpResponse("You've created a new TodoList under", form.cleaned_data["parent"], "Group")
 
 
     else:
@@ -50,7 +51,22 @@ def makeNewTodoList(request):
     return render(request, "makeNewTodoList.html", {"form": form})
 
 def makeNewTodoItem(request):
+    if request.method == "POST":
+        form = TodoItemForm(request.POST)
 
-    return HttpResponse("Here is where new TodoItem List Goes")
+        if form.is_valid():
+            newTodoItem = TodoItem()
+            parentList = TodoList.objects.get(name=form.cleaned_data["parent"]) 
+            newTodoItem.todoList = parentList
+            newTodoItem.name = form.cleaned_data["name"]
+            newTodoItem.deadline = form.cleaned_data["deadline"]
+            newTodoItem.completed = False
+            newTodoItem.save()
+            return HttpResponse("You've created a new TodoItem")
 
+
+    else:
+        form = TodoItemForm()
+
+    return render(request, "makeNewTodoItem.html", {"form": form})
     
