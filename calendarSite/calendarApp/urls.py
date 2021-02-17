@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path("makeNewGroup", views.makeNewGroup, name="makeNewGroup"),
     path("makeNewTodoList", views.makeNewTodoList, name="makeNewTodoList"),
+    path("makeNewTodoItem", views.makeNewTodoItem, name="makeNewTodoItem"),
 ]

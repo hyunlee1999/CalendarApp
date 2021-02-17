@@ -10,9 +10,9 @@ class TodoListForm(forms.Form):
 
     for group in groupList:
         name = group.name
-        groupNames.append(name)
-    
-    groupNames = tuple(groupNames)
+        groupNames.append((name, name))
 
-    parentGroup = forms.ChoiceField(choices=groupNames)
+    groupNames = tuple(groupNames)
+    
+    parentGroup = forms.CharField(label="Parent Group", widget=forms.Select(choices=groupNames))
     name = forms.CharField(label="Todo List Name", max_length=100)

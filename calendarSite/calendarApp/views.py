@@ -40,4 +40,8 @@ def makeNewTodoList(request):
 
     return render(request, "makeNewTodoList.html", {"form": form})
 
+def makeNewTodoItem(request):
+
+    return HttpResponse("Here is where new TodoItem List Goes")
+
     
