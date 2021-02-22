@@ -19,7 +19,7 @@ h2 {
     position: fixed;
     height: 100%;
     overflow: auto;
-    list-style-type: none im !important;
+    list-style-type: none !important;
   }
   
   /* Sidebar links */
