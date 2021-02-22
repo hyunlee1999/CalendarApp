@@ -10,6 +10,10 @@ h2 {
     color: purple;
 }
 
+ul {
+  list-style: none;
+}
+
 /* The side navigation menu */
 .sidebar {
     margin: 0;
