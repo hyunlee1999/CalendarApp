@@ -66,3 +66,7 @@ h2 {
       float: none;
     }
   }
+
+.logoPadding {
+    padding-left: 30px;
+}
