@@ -2,11 +2,13 @@
 
 
 {% block content %}
-  <h2>TodoList Count</h2>
-  <p>You currently have these many things going on:</p>
-  <ul>
-    <li><strong>Groups:</strong> {{ num_Groups }}</li>
-    <li><strong>Todo List:</strong> {{ num_TodoList }}</li>
-    <li><strong>Todo Item:</strong> {{ num_TodoItem }}</li>
-  </ul>
+<div class="content">
+    <h2>TodoList Count</h2>
+    <p>You currently have these many things going on:</p>
+    <ul>
+      <li><strong>Groups:</strong> {{ num_Groups }}</li>
+      <li><strong>Todo List:</strong> {{ num_TodoList }}</li>
+      <li><strong>Todo Item:</strong> {{ num_TodoItem }}</li>
+    </ul>
+  </div>
 {% endblock %}
