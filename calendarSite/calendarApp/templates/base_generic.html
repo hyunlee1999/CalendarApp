@@ -13,12 +13,13 @@
     <a href="/"><h1>Calendar App</h1></a>
     {% endblock %}
     {% block navigation %}
-        <ul>
-            <li><a href="/makeNewGroup">Make New Group</a></li>
-            <li><a href="/makeNewTodoList">Make New Todo List</a></li>
-            <li><a href="/makeNewTodoItem">Make New Todo Item</a></li>
-
-        </ul>
+        <div class='sidebar'>
+            <ul>
+                <li><a href="/makeNewGroup">Make New Group</a></li>
+                <li><a href="/makeNewTodoList">Make New Todo List</a></li>
+                <li><a href="/makeNewTodoItem">Make New Todo Item</a></li>
+            </ul>
+        </div>
     {% endblock %}
     {% block sidebar %}<!-- insert default sidebar text for every page -->{% endblock %}
     {% block content %}{% endblock %}
