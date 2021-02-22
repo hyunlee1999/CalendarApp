@@ -1,11 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
+<div class="content">
     <h2>Make New TodoItem</h2>
     <form action="makeNewTodoItem" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit">
     </form>
+</div>
 {% endblock %}

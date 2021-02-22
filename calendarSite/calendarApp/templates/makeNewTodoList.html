@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-
+<div class="content">
     <h2>Make New TodoList</h2>
     <p>Still Need to code the logic to save it to the database</p>
     <form action="makeNewTodoList" method="post">
@@ -9,4 +9,5 @@
         {{ form }}
         <input type="submit" value="Submit">
     </form>
+</div>
 {% endblock %}
