@@ -14,7 +14,7 @@ ul {
   list-style: none;
 }
 
-.main {
+div.main {
   width: 80%;
 	max-width: 1920px;
 	height: 100%;
