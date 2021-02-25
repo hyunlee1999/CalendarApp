@@ -14,6 +14,14 @@ ul {
   list-style: none;
 }
 
+.main {
+  width: 80%;
+	max-width: 1920px;
+	height: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+
 /* The side navigation menu */
 .sidebar {
     margin: 0;
