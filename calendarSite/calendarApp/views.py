@@ -5,6 +5,7 @@ from .forms import GroupForm, TodoListForm, TodoItemForm
 
 
 def index(request):
+
     num_Groups = Group.objects.all().count()
     num_TodoList = TodoList.objects.all().count()
     num_TodoItem = TodoItem.objects.all().count()
