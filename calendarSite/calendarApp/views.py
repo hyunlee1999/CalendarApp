@@ -4,6 +4,9 @@ from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm
 
 
+#need to throw an error if there the users make a name that is already in the database.
+
+
 def index(request):
 
     num_Groups = Group.objects.all().count()
