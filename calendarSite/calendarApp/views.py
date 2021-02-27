@@ -33,6 +33,9 @@ def makeNewGroup(request):
     return render(request, "makeNewGroup.html", {"form": form})
 
 def makeNewTodoList(request):
+    groupList = Group.objects.all()
+    print(len(groupList))
+
     if request.method == "POST":
         form = TodoListForm(request.POST)
 
@@ -42,7 +45,7 @@ def makeNewTodoList(request):
             newTodoList.group = parentGroup
             newTodoList.name = form.cleaned_data["name"]
             newTodoList.save()
-            return HttpResponse("You've created a new TodoList under", form.cleaned_data["parent"], "Group")
+            return HttpResponse("You've created a new TodoList")
 
 
     else:
