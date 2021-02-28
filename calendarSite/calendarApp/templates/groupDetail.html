@@ -3,5 +3,16 @@
 {% block content %}
 <div class="content">
     <h2>Group <span>{{ group.name }}<span></h2>
+        {% if todoLists%}
+        <p>This group has these todoLists:</p>
+        <ol>
+            {% for todoList in todoLists %}
+            <li>{{ todoList.name }}</li>
+            {% endfor %}
+        </ol>
+
+        {% else %}
+        <p>There is no todoLists for this group</p>
+        {% endif %}
 </div>
 {% endblock %}

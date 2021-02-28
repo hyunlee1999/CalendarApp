@@ -97,5 +97,12 @@ def makeNewTodoItem(request):
 
 def groupDetail(request, group):
     group = get_object_or_404(Group, name=group)
-    return render(request, "groupDetail.html", {"group": group})
+    childLists = TodoList.objects.all().filter(group=group)
+    return render(request, "groupDetail.html", {"group": group, "todoLists": childLists})
+    
+def todoListDetail(request, group, todoList):
+    group = get_object_or_404(Group, name=group)
+    todoList = get_object_or_404(TodoList, name=todoList, group=group)
+    childItems = TodoItem.objects.all().filter(todoList = todoList)
+    return render(request, "todoListDetail.html", {"group": group, "todoList": todoList, "todoItems": childItems})
     

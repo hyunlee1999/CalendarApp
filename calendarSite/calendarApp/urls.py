@@ -8,4 +8,6 @@ urlpatterns = [
     path("makeNewTodoList", views.makeNewTodoList, name="makeNewTodoList"),
     path("makeNewTodoItem", views.makeNewTodoItem, name="makeNewTodoItem"),
     path("<str:group>/", views.groupDetail, name="groupDetail"),
+    path("<str:group>/<str:todoList>/", views.todoListDetail, name="todoListDetail"),
+
 ]

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="content">
+    <h2>TodoList <span>{{ todoList.name }}<span></h2>
+        <p>This TodoList belongs to <span> {{ group.name }}</span></p>
+        {% if todoItems %}
+        <p>This todoList has these todoItems:</p>
+        <ol>
+            {% for todoItem in todoItems %}
+            <li>{{ todoItem.name }}</li>
+            {% endfor %}
+        </ol>
+
+        {% else %}
+        <p>There is no todoItems for this todoLists</p>
+        {% endif %}
+</div>
+{% endblock %}
