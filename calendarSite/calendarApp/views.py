@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm
@@ -94,4 +94,8 @@ def makeNewTodoItem(request):
         form = TodoItemForm()
 
     return render(request, "makeNewTodoItem.html", {"form": form})
+
+def groupDetail(request, group):
+    group = get_object_or_404(Group, name=group)
+    return render(request, "groupDetail.html", {"group": group})
     

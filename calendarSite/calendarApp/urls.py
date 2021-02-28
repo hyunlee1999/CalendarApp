@@ -7,4 +7,5 @@ urlpatterns = [
     path("makeNewGroup", views.makeNewGroup, name="makeNewGroup"),
     path("makeNewTodoList", views.makeNewTodoList, name="makeNewTodoList"),
     path("makeNewTodoItem", views.makeNewTodoItem, name="makeNewTodoItem"),
+    path("<str:group>/", views.groupDetail, name="groupDetail"),
 ]
