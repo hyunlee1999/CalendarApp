@@ -12,6 +12,35 @@
       <li><strong>Todo List:</strong> {{ num_TodoList }}</li>
       <li><strong>Todo Item:</strong> {{ num_TodoItem }}</li>
     </ul>
+
+    {% if groups %}
+      <h2>You have these groups:</h2>
+      <ol>
+        {% for group in groups %}
+          <li>{{group.name}}</li>
+        {% endfor %}
+      </ol>
+    {% endif %}
+
+    {% if todoLists %}
+    <h2>You have these TodoLists:</h2>
+    <ol>
+      {% for todoList in todoLists %}
+        <li>{{todoList.name}}</li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+    {% if todoItems %}
+    <h2>You have these TodoItems:</h2>
+    <ol>
+      {% for todoItems in todoItems %}
+        <li>{{todoItems.name}}</li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+
   </div>
 </div>
 {% endblock %}

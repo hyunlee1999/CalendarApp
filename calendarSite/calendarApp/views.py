@@ -23,11 +23,19 @@ def index(request):
     num_Groups = Group.objects.all().count()
     num_TodoList = TodoList.objects.all().count()
     num_TodoItem = TodoItem.objects.all().count()
+    groups = Group.objects.all()
+    todoLists = TodoList.objects.all()
+    todoItems = TodoItem.objects.all()
 
     context = {
         "num_Groups": num_Groups,
         "num_TodoList": num_TodoList,
         "num_TodoItem": num_TodoItem,
+        "groups": groups,
+        "todoLists": todoLists,
+        "todoItems": todoItems,
+
+
     }
 
     return render(request, "index.html", context=context)
@@ -75,8 +83,6 @@ def makeNewTodoItem(request):
             newTodoItem = TodoItem()
             parentList = TodoList.objects.get(name=form.cleaned_data["parentList"]) 
             newTodoItem.todoList = parentList
-            parentGroup = Group.objects.get(name=form.cleaned_data["parentGroup"])
-            newTodoItem.group = parentGroup
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.completed = False

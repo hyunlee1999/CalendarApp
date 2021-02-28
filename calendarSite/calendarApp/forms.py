@@ -27,14 +27,6 @@ class TodoListForm(forms.Form):
 
         
 class TodoItemForm(forms.Form):
-    parentGroup= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
-
-    try:
-        object = Group.objects.get(name = str(parentGroup))
-        print(object.name)
-
-    except Group.DoesNotExist:
-        print("does not exists")
 
     parentList= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all())
     name = forms.CharField(label="Todo Item Name", max_length=100)
@@ -43,7 +35,6 @@ class TodoItemForm(forms.Form):
     def clean(self):
         cleanedData = super().clean()
         nameCleaned = cleanedData.get("name")
-        parentGroup = cleanedData.get("parentGroup")
         parentList = cleanedData.get("parentList")
-        if TodoItem.objects.filter(name=nameCleaned, group = parentGroup, todoList=parentList).exists():
-            raise ValidationError ("Error: A Todo Item with that name already exists in" + str(parentGroup) + "group" + str(parentList) + "list")
+        if TodoItem.objects.filter(name=nameCleaned, todoList=parentList).exists():
+            raise ValidationError ("Error: A Todo Item with that name already exists in" + str(parentList) + "list")
