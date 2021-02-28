@@ -13,7 +13,9 @@ class TodoList(models.Model):
     def __str__(self):
         return self.name
 
+
 class TodoItem(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     todoList = models.ForeignKey(TodoList, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     completed = models.BooleanField(default=False)

@@ -5,9 +5,20 @@ from .forms import GroupForm, TodoListForm, TodoItemForm
 
 
 #need to throw an error if there the users make a name that is already in the database.
+#Also need to code some of the things if it is empty
 
 
 def index(request):
+
+    '''
+
+    TodoItem.objects.all().delete()
+    TodoList.objects.all().delete()
+    Group.objects.all().delete()
+
+        '''
+
+
 
     num_Groups = Group.objects.all().count()
     num_TodoList = TodoList.objects.all().count()
@@ -38,7 +49,6 @@ def makeNewGroup(request):
 
 def makeNewTodoList(request):
     groupList = Group.objects.all()
-    print(len(groupList))
 
     if request.method == "POST":
         form = TodoListForm(request.POST)
@@ -63,8 +73,10 @@ def makeNewTodoItem(request):
 
         if form.is_valid():
             newTodoItem = TodoItem()
-            parentList = TodoList.objects.get(name=form.cleaned_data["parent"]) 
+            parentList = TodoList.objects.get(name=form.cleaned_data["parentList"]) 
             newTodoItem.todoList = parentList
+            parentGroup = Group.objects.get(name=form.cleaned_data["parentGroup"])
+            newTodoItem.group = parentGroup
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.completed = False
