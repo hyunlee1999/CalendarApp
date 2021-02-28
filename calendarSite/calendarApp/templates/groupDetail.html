@@ -7,7 +7,7 @@
         <p>This group has these todoLists:</p>
         <ol>
             {% for todoList in todoLists %}
-            <li>{{ todoList.name }}</li>
+            <li><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></li>
             {% endfor %}
         </ol>
 

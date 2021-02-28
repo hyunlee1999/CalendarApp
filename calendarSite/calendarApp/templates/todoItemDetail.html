@@ -3,8 +3,8 @@
 {% block content %}
 <div class="content">
     <h2>TodoItem <span>{{ todoItem.name }}<span></h2>
-        <p>This TodoItem belongs to Group <span> {{ group.name }}</span></p>
-        <p>This TodoItem belongs to todoList <span> {{ todoList.name }}</span></p>
+        <p>This TodoItem belongs to Group <a href="/{{group.name}}"><span> {{ group.name }}</span></a></p>
+        <p>This TodoItem belongs to todoList <a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a> </p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
 </div>
 {% endblock %}
