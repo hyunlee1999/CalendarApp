@@ -10,13 +10,16 @@
 <body>
 
     {% block siteTitle %}
-    <div class="logoPadding">
-        <a href="/"><img src="{% static 'calendarApp/calendarAppLogo.png' %}" alt="Logo for Calendar Application" style="height: 100px;"></a>
-    </div>
+    
     {% endblock %}
     {% block navigation %}
         <div class='sidebar'>
             <ul>
+                <li>
+                    <div class="logoPadding">
+                    <a href="/"><img src="{% static 'calendarApp/calendarAppLogo.png' %}" alt="Logo for Calendar Application" style="height: 100px;"></a>
+                    </div>
+                </li>
                 <li><a href="/makeNewGroup">Make New Group</a></li>
                 <li><a href="/makeNewTodoList">Make New Todo List</a></li>
                 <li><a href="/makeNewTodoItem">Make New Todo Item</a></li>
