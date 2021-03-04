@@ -2,9 +2,33 @@
 
 {% block content %}
 <div class="content">
-    <h2>TodoItem <span>{{ todoItem.name }}<span></h2>
+    <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
         <p>This TodoItem belongs to Group <a href="/{{group.name}}"><span> {{ group.name }}</span></a></p>
         <p>This TodoItem belongs to todoList <a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a> </p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
+        <button id="delete">Delete</button>
 </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $("#delete").click(function () {
+
+            var name = $("#name").text();
+            console.log(name);
+
+            $.ajax({
+                url: "/ajax/delete",
+                data: {
+                    "name": name,
+                    "type": "todoItem",
+                },
+                dataType: "json",
+                success: function(){
+                    console.log("Success!")
+                }
+            })
+
+        });
+    </script>
 {% endblock %}

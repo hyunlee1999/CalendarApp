@@ -10,6 +10,8 @@ urlpatterns = [
     path("<str:group>/", views.groupDetail, name="groupDetail"),
     path("<str:group>/<str:todoList>/", views.todoListDetail, name="todoListDetail"),
     path("<str:group>/<str:todoList>/<str:todoItem>", views.todoItemDetail, name="todoItemDetail"),
+    path("ajax/delete", views.delete, name="delete"),
+
 
 
 ]
