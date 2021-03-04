@@ -31,9 +31,13 @@
                     if (data.isDeleted){
                         $(".detail").remove()
 
-                        $(document.createElement('p'), {
-                            innerHTML: "The TodoList is removed",
-                        }).appendTo('.content');
+                        g = document.createElement('p');
+                        g.setAttribute("id", "message");
+                        g.innerHTML = "This TodoList is deleted";
+                        
+                        $(".content").append(g);
+
+                        
                     }
                 }
             })
