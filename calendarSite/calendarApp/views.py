@@ -119,8 +119,17 @@ def delete(request):
     name = request.GET.get("name")
     if (type == "group"):
         print("dummy")
+        
     elif (type == "todoList"):
-        print ("dummy")
+        object = TodoList.objects.all().filter(name = name)
+        object.delete()
+
+        data = {
+            "isDeleted":True,
+        }
+
+        return JsonResponse(data)
+
     elif (type == "todoItem"):
         object = TodoItem.objects.all().filter(name = name)
         object.delete()

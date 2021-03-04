@@ -2,7 +2,8 @@
 
 {% block content %}
 <div class="content">
-    <h2>TodoList <span>{{ todoList.name }}<span></h2>
+    <div class="detail">
+    <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
         <p>This TodoList belongs to <a href="/{{group.name}}"><span> {{ group.name }}</span></a> </p>
         {% if todoItems %}
         <p>This todoList has these todoItems:</p>
@@ -15,5 +16,39 @@
         {% else %}
         <p>There is no todoItems for this todoLists</p>
         {% endif %}
+
+        <button id="delete">Delete</button>
+    </div>
+
 </div>
+{% endblock %}
+{% block javascript %}
+    <script>
+        $("#delete").click(function () {
+
+            var name = $("#name").text();
+
+            $.ajax({
+                url: "/ajax/delete",
+                data: {
+                    "name": name,
+                    "type": "todoList",
+                },
+                dataType: "json",
+                success: function(data){
+                    if (data.isDeleted){
+                        $(".detail").remove()
+
+                        g = document.createElement('p');
+                        g.setAttribute("id", "message");
+                        g.innerHTML = "This TodoList is deleted";
+                        
+                        $(".content").append(g);
+
+                    }
+                }
+            })
+
+        });
+    </script>
 {% endblock %}
