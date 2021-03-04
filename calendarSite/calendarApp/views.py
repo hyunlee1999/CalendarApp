@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm
+from django.http import JsonResponse
+
 
 
 #need to throw an error if there the users make a name that is already in the database.
@@ -113,4 +115,18 @@ def todoItemDetail(request, group, todoList, todoItem):
     return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
 
 def delete(request):
-    print("hi")    
+    type = request.GET.get("type")
+    name = request.GET.get("name")
+    if (type == "group"):
+        print("dummy")
+    elif (type == "todoList"):
+        print ("dummy")
+    elif (type == "todoItem"):
+        object = TodoItem.objects.all().filter(name = name)
+        object.delete()
+    
+    data = {
+        "isDeleted":True,
+    }
+
+    return JsonResponse(data)

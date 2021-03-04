@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="content">
-    <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
+    <div class="detail">
+        <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
         <p>This TodoItem belongs to Group <a href="/{{group.name}}"><span> {{ group.name }}</span></a></p>
         <p>This TodoItem belongs to todoList <a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a> </p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
         <button id="delete">Delete</button>
+    </div>
+
 </div>
 {% endblock %}
 
@@ -24,8 +27,14 @@
                     "type": "todoItem",
                 },
                 dataType: "json",
-                success: function(){
-                    console.log("Success!")
+                success: function(data){
+                    if (data.isDeleted){
+                        $(".detail").remove()
+
+                        $(document.createElement('p'), {
+                            innerHTML: "The TodoList is removed",
+                        }).appendTo('.content');
+                    }
                 }
             })
 
