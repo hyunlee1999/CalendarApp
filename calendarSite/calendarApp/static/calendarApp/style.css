@@ -55,6 +55,21 @@ div.main {
     padding: 1px 16px;
     height: 1000px;
   }
+
+
+  /* Dummy CSS for Divs in index.html. Please feel free to add any divs to index.html when necessary! */
+  #groupOverview {
+    background-color: yellow;
+    padding: 30px;
+  }
+
+  .groups {
+    background-color: red;
+  }
+
+
+    /* End dummy css */
+
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar */
   @media screen and (max-width: 700px) {

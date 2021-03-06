@@ -13,6 +13,9 @@ class TodoList(models.Model):
     def __str__(self):
         return self.name
 
+    def getGroup(self):
+        return str(self.group)
+
 
 class TodoItem(models.Model):
     todoList = models.ForeignKey(TodoList, on_delete=models.CASCADE)
@@ -22,3 +25,4 @@ class TodoItem(models.Model):
 
     def __str__(self):
         return self.name
+    

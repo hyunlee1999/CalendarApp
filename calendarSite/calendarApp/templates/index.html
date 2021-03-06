@@ -6,39 +6,38 @@
 <div class="content">
   <div class="main">
     <h2>TodoList Count</h2>
-    <p>You currently have these many things going on:</p>
     <ul>
       <li><strong>Groups:</strong> {{ num_Groups }}</li>
       <li><strong>Todo List:</strong> {{ num_TodoList }}</li>
       <li><strong>Todo Item:</strong> {{ num_TodoItem }}</li>
     </ul>
 
+    <h2>Group Overview</h2>
+
+
     {% if groups %}
-      <h2>You have these groups:</h2>
-      <ol>
+      <div id="groupOverview">
+
         {% for group in groups %}
-          <li><a href="/{{group.name}}">{{group.name}}</a></li>
+          <div class="groups">
+            <p><a href="/{{group.name}}">{{group.name}}</a></p>
+
+            <ul class="todoList">
+
+            {% for todoList in todoLists %}  
+              {% if todoList.getGroup == group.name %}
+                <li><a href="/{{todoList.group}}/{{todoList.name}}">{{todoList.name}}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            </ul>
+
+          </div>
         {% endfor %}
-      </ol>
+
+      </div>
     {% endif %}
 
-    {% if todoLists %}
-    <h2>You have these TodoLists:</h2>
-    <ol>
-      {% for todoList in todoLists %}
-        <li><a href="/{{todoList.group}}/{{todoList.name}}">{{todoList.name}}</a></li>
-      {% endfor %}
-    </ol>
-    {% endif %}
-
-    {% if todoItems %}
-    <h2>You have these TodoItems:</h2>
-    <ol>
-      {% for todoItem in todoItems %}
-        <li> <a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem}}">{{todoItem.name}}</a></li>
-      {% endfor %}
-    </ol>
-    {% endif %}
 
 
   </div>
