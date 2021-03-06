@@ -4,13 +4,23 @@
 <div class="content">
     <div class="detail">
         <h2>Group <span id="name">{{ group.name }}<span></h2>
-            {% if todoLists%}
-            <p>This group has these todoLists:</p>
-            <ol>
-                {% for todoList in todoLists %}
-                <li><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></li>
-                {% endfor %}
-            </ol>
+
+            <div class="groupOverview">
+                {% if todoLists %}
+                    <h2>TodoList Overview</h2>
+                    {% for todoList in todoLists %}
+                    <div class="todoLists">
+                        <p><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></p>
+                            <ul>
+                                {% for todoItem in todoItems %}
+                                    {% if todoItem.getTodoList == todoList.name %}
+                                        <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                    </div>
+                    {% endfor %}
+            </div>
 
             {% else %}
             <p>There is no todoLists for this group</p>

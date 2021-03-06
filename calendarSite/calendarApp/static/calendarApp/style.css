@@ -58,14 +58,16 @@ div.main {
 
 
   /* Dummy CSS for Divs in index.html. Please feel free to add any divs to index.html when necessary! */
-  #groupOverview {
+  .indexOverview, .groupOverview {
     background-color: yellow;
     padding: 30px;
   }
 
-  .groups {
+  .groups, .todoLists {
     background-color: red;
   }
+
+  
 
 
     /* End dummy css */

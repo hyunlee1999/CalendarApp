@@ -25,4 +25,7 @@ class TodoItem(models.Model):
 
     def __str__(self):
         return self.name
+
+    def getTodoList(self):
+        return str(self.todoList)
     
