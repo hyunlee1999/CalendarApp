@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm
 from django.http import JsonResponse
+from django.shortcuts import redirect
+
 
 
 
@@ -36,8 +38,6 @@ def index(request):
         "groups": groups,
         "todoLists": todoLists,
         "todoItems": todoItems,
-
-
     }
 
     return render(request, "index.html", context=context)
@@ -50,7 +50,8 @@ def makeNewGroup(request):
             newGroup = Group()
             newGroup.name = form.cleaned_data["name"]
             newGroup.save()
-            return HttpResponse("You've created a new group")
+
+            return redirect("/%s/" % newGroup.name)
 
     else:
         form = GroupForm()
@@ -69,8 +70,7 @@ def makeNewTodoList(request):
             newTodoList.group = parentGroup
             newTodoList.name = form.cleaned_data["name"]
             newTodoList.save()
-            return HttpResponse("You've created a new TodoList")
-
+            return redirect("/%s/%s" % (parentGroup, newTodoList.name))
 
     else:
         form = TodoListForm()
@@ -89,7 +89,7 @@ def makeNewTodoItem(request):
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.completed = False
             newTodoItem.save()
-            return HttpResponse("You've created a new TodoItem")
+            return redirect("/%s/%s/%s" % (parentList.group, parentList.name, newTodoItem.name))
 
 
     else:

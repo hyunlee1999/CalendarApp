@@ -24,31 +24,33 @@
 {% block javascript %}
     <script>
         $("#delete").click(function () {
+            if (window.confirm("Are you sure that you want to delete?")){
 
-            var name = $("#name").text();
-            console.log(name);
+                var name = $("#name").text();
+                console.log(name);
 
-            $.ajax({
-                url: "/ajax/delete",
-                data: {
-                    "name": name,
-                    "type": "group",
-                },
-                dataType: "json",
-                success: function(data){
-                    if (data.isDeleted){
-                        $(".detail").remove()
+                $.ajax({
+                    url: "/ajax/delete",
+                    data: {
+                        "name": name,
+                        "type": "group",
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if (data.isDeleted){
+                            $(".detail").remove()
 
-                        g = document.createElement('p');
-                        g.setAttribute("id", "message");
-                        g.innerHTML = "This Group is deleted";
-                        
-                        $(".content").append(g);
+                            g = document.createElement('p');
+                            g.setAttribute("id", "message");
+                            g.innerHTML = "This Group is deleted";
+                            
+                            $(".content").append(g);
 
+                        }
                     }
-                }
-            })
+                })
 
+            }
         });
     </script>
 {% endblock %}

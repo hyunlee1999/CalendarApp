@@ -1,10 +1,12 @@
 from django import forms
 from .models import Group, TodoList, TodoItem
 from django.core.exceptions import ValidationError
+from .validators import validate_name
+
 
 
 class GroupForm(forms.Form):
-    name = forms.CharField(label="Group Name", max_length=100)
+    name = forms.CharField(label="Group Name", max_length=100, validators=[validate_name])
 
     def clean(self):
         cleanedData = super().clean()
@@ -14,7 +16,7 @@ class GroupForm(forms.Form):
 
 class TodoListForm(forms.Form):        
     parent= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
-    name = forms.CharField(label="Todo List Name", max_length=100)
+    name = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
 
     def clean(self):
         cleanedData = super().clean()
@@ -29,7 +31,7 @@ class TodoListForm(forms.Form):
 class TodoItemForm(forms.Form):
 
     parentList= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all())
-    name = forms.CharField(label="Todo Item Name", max_length=100)
+    name = forms.CharField(label="Todo Item Name", max_length=100, validators=[validate_name])
     deadline = forms.DateField(widget = forms.SelectDateWidget(), label="Deadline:")
 
     def clean(self):

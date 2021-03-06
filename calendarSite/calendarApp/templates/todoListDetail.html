@@ -25,30 +25,32 @@
 {% block javascript %}
     <script>
         $("#delete").click(function () {
+            if (window.confirm("Are you sure that you want to delete?")){
 
-            var name = $("#name").text();
 
-            $.ajax({
-                url: "/ajax/delete",
-                data: {
-                    "name": name,
-                    "type": "todoList",
-                },
-                dataType: "json",
-                success: function(data){
-                    if (data.isDeleted){
-                        $(".detail").remove()
+                var name = $("#name").text();
 
-                        g = document.createElement('p');
-                        g.setAttribute("id", "message");
-                        g.innerHTML = "This TodoList is deleted";
-                        
-                        $(".content").append(g);
+                $.ajax({
+                    url: "/ajax/delete",
+                    data: {
+                        "name": name,
+                        "type": "todoList",
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if (data.isDeleted){
+                            $(".detail").remove()
 
+                            g = document.createElement('p');
+                            g.setAttribute("id", "message");
+                            g.innerHTML = "This TodoList is deleted";
+                            
+                            $(".content").append(g);
+
+                        }
                     }
-                }
-            })
-
+                })
+            }
         });
     </script>
 {% endblock %}
