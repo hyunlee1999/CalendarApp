@@ -6,12 +6,6 @@ from django.http import JsonResponse
 from django.shortcuts import redirect
 
 
-
-
-#need to throw an error if there the users make a name that is already in the database.
-#Also need to code some of the things if it is empty
-
-
 def index(request):
 
     '''

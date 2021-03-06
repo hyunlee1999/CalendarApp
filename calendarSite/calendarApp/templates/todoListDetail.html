@@ -6,12 +6,12 @@
     <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
         <p>This TodoList belongs to <a href="/{{group.name}}"><span> {{ group.name }}</span></a> </p>
         {% if todoItems %}
-        <p>This todoList has these todoItems:</p>
-        <ol>
+        <h2>TodoItem Overview</h2>
+        <ul>
             {% for todoItem in todoItems %}
             <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
             {% endfor %}
-        </ol>
+        </ul>
 
         {% else %}
         <p>There is no todoItems for this todoLists</p>
