@@ -133,3 +133,11 @@ def delete(request):
     }
 
     return JsonResponse(data)
+
+
+#Need to still finish this
+def edit(request, group, todoList=None, todoItem=None):
+    group = get_object_or_404(Group, name=group)
+    todoList = get_object_or_404(TodoList, name=todoList, group=group)
+    todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
+    return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})

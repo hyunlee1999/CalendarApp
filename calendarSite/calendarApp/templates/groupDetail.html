@@ -7,7 +7,7 @@
 
             <div class="groupOverview">
                 {% if todoLists %}
-                    <h2>TodoList Overview</h2>
+                    <h2>TodoLists in Group {{ group.name }}</h2>
                     {% for todoList in todoLists %}
                     <div class="todoLists">
                         <p><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></p>
@@ -25,6 +25,8 @@
             {% else %}
             <p>There is no todoLists for this group</p>
             {% endif %}
+
+            <button>Edit</button>
 
             <button onclick="location.href='/makeNewTodoList'">Add New TodoList</button>
 
