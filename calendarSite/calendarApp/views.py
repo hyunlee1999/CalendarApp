@@ -8,16 +8,6 @@ from django.shortcuts import redirect
 
 def index(request):
 
-    '''
-
-    TodoItem.objects.all().delete()
-    TodoList.objects.all().delete()
-    Group.objects.all().delete()
-
-        '''
-
-
-
     num_Groups = Group.objects.all().count()
     num_TodoList = TodoList.objects.all().count()
     num_TodoItem = TodoItem.objects.all().count()
