@@ -6,7 +6,6 @@
     <form action="makeNewGroup" method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="hidden" name="previous" value={{ group }}>
         <input type="submit" value="Submit">
     </form>
 </div>

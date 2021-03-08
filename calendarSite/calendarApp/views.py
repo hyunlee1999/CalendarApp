@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Group, TodoList, TodoItem
-from .forms import GroupForm, TodoListForm, TodoItemForm
+from .forms import GroupForm, TodoListForm, TodoItemForm, EditGroupForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -139,18 +139,23 @@ def delete(request):
 def editGroup(request, group_):
 
     if request.method == "POST":
-        form = GroupForm(request.POST)
+        form = EditGroupForm(request.POST)
+        print(form.is_valid())
 
         if form.is_valid():
-            print(asbd)
-            groupName = form.cleaned_data["prevous"]
+            groupName = form.cleaned_data["previous"]
             group = get_object_or_404(Group, name=groupName)
             group.name =  form.cleaned_data["name"]
 
             return redirect("/%s/" % group.name)
 
     else:
+        initial_dict = {
+            "name": group_,
+            "previous": group_,
+        }
+
         group = get_object_or_404(Group, name=group_)
-        form = GroupForm()
+        form = EditGroupForm(initial=initial_dict)
 
     return render(request, "editGroup.html", {"form": form, "group": group.name})
