@@ -7,6 +7,7 @@ from .validators import validate_name
 
 class GroupForm(forms.Form):
     name = forms.CharField(label="Group Name", max_length=100, validators=[validate_name])
+    previous = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleanedData = super().clean()
@@ -14,16 +15,8 @@ class GroupForm(forms.Form):
         if Group.objects.filter(name=nameCleaned).exists():
             raise ValidationError ("Error: A  group with that name already exists")
 
-class EditGroupForm(forms.Form):
-    previous = forms.CharField(label="You are editing this field", disabled=True)
-    name = forms.CharField(label="Group Name", max_length=100, validators=[validate_name])
-
-
-    def clean(self):
-        cleanedData = super().clean()
-        nameCleaned = cleanedData.get("name")
-        if Group.objects.filter(name=nameCleaned).exists():
-            raise ValidationError ("Error: A  group with that name already exists")
+    def clean_previous(self):
+        return self.fields['previous'].initial
 
 class TodoListForm(forms.Form):        
     parent= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
