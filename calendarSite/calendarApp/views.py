@@ -136,8 +136,21 @@ def delete(request):
 
 
 #Need to still finish this
-def edit(request, group, todoList=None, todoItem=None):
-    group = get_object_or_404(Group, name=group)
-    todoList = get_object_or_404(TodoList, name=todoList, group=group)
-    todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
-    return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
+def editGroup(request, group_):
+
+    if request.method == "POST":
+        form = GroupForm(request.POST)
+
+        if form.is_valid():
+            print(asbd)
+            groupName = form.cleaned_data["prevous"]
+            group = get_object_or_404(Group, name=groupName)
+            group.name =  form.cleaned_data["name"]
+
+            return redirect("/%s/" % group.name)
+
+    else:
+        group = get_object_or_404(Group, name=group_)
+        form = GroupForm()
+
+    return render(request, "editGroup.html", {"form": form, "group": group.name})
