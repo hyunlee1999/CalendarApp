@@ -154,6 +154,7 @@ def editGroup(request, group_):
             group.save()
 
             return redirect("/%s/" % group.name)
+            
         else:
             print(form.errors)
 
