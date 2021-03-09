@@ -7,7 +7,7 @@ h2 {
 }
 
 ul {
-  list-style: none;
+  /* list-style: none; */
 }
 
 /* The side navigation menu */
@@ -65,7 +65,7 @@ ul {
   }
 
   .groups, .todoLists {
-    background-color: red;
+    background-color: grey;
   }
 
   
