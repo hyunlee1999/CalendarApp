@@ -13,10 +13,11 @@ urlpatterns = [
     #Group Details
     path("<str:group>/", views.groupDetail, name="groupDetail"),
     path("<str:group>/<str:todoList>/", views.todoListDetail, name="todoListDetail"),
-    path("<str:group>/<str:todoList>/<str:todoItem>", views.todoItemDetail, name="todoItemDetail"),
+    path("<str:group>/<str:todoList>/<str:todoItem>/", views.todoItemDetail, name="todoItemDetail"),
     
-    #Edit Groups
+    #Edit
     path("edit/<str:group_>", views.editGroup, name="editGroup"),
+    path("edit/<str:group_>/<str:todoList_>", views.editTodoList, name="editTodoList"),
 
     #Ajax Requests
     path("ajax/delete", views.delete, name="delete"),

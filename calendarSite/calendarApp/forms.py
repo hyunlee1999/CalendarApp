@@ -23,6 +23,8 @@ class GroupForm(forms.Form):
 class TodoListForm(forms.Form):        
     parent= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
     name = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
+    previousParent = forms.CharField(widget=forms.HiddenInput(), required=False)
+    previousName = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleanedData = super().clean()
@@ -31,6 +33,14 @@ class TodoListForm(forms.Form):
         if TodoList.objects.filter(name=nameCleaned, group=parentCleaned).exists():
             error = "Error: A Todo List with that name already exists in group " + str(parentCleaned)
             raise ValidationError (error)
+
+        if "previousParent" in self.initial:
+            cleanedData["previousParent"] = self.initial["previousParent"]
+
+        if "previousName" in self.initial:
+            cleanedData["previousName" ] = self.initial["previousName"]
+
+        return cleanedData
 
 
         

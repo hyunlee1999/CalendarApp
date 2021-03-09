@@ -134,8 +134,6 @@ def delete(request):
 
     return JsonResponse(data)
 
-
-#Need to still finish this
 def editGroup(request, group_):
 
     if request.method == "POST":
@@ -145,7 +143,6 @@ def editGroup(request, group_):
         }
 
         form = GroupForm(request.POST, initial=initial_dict)
-        print(form.is_valid())
 
         if form.is_valid():
             groupName = form.cleaned_data["previous"]
@@ -154,9 +151,6 @@ def editGroup(request, group_):
             group.save()
 
             return redirect("/%s/" % group.name)
-            
-        else:
-            print(form.errors)
 
     else:
         initial_dict = {
@@ -168,3 +162,35 @@ def editGroup(request, group_):
         form = GroupForm(initial=initial_dict)
 
     return render(request, "editGroup.html", {"form": form, "group": group.name})
+
+
+def editTodoList(request, group_, todoList_):
+
+    initial_dict = {
+        "name": todoList_,
+        "parent": get_object_or_404(Group, name=group_),
+        "previousParent": group_,
+        "previousName": todoList_,
+    }
+
+    if request.method == "POST":
+
+        form = TodoListForm(request.POST, initial=initial_dict)
+
+        if form.is_valid():
+            previousName = form.cleaned_data["previousName"]
+            previousParent = form.cleaned_data["previousParent"]
+            previousParent = get_object_or_404(Group, name=previousParent)
+            todoList = get_object_or_404(TodoList, name=previousName, group=previousParent)
+            todoList.name =  form.cleaned_data["name"]
+            todoList.group = get_object_or_404(Group, name=form.cleaned_data["parent"])
+            todoList.save()
+
+            return redirect("/%s/%s" % (todoList.group, todoList.name))
+            
+    else:
+        group =  get_object_or_404(Group, name=group_)
+        todoList = get_object_or_404(TodoList, name=todoList_, group=group)
+        form = TodoListForm(initial=initial_dict)
+
+    return render(request, "editTodoList.html", {"form": form, "group": todoList.group, "name": todoList.name})
