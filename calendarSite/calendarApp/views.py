@@ -139,15 +139,23 @@ def delete(request):
 def editGroup(request, group_):
 
     if request.method == "POST":
-        form = GroupForm(request.POST)
+
+        initial_dict = {
+            "previous": group_,
+        }
+
+        form = GroupForm(request.POST, initial=initial_dict)
         print(form.is_valid())
 
         if form.is_valid():
             groupName = form.cleaned_data["previous"]
             group = get_object_or_404(Group, name=groupName)
             group.name =  form.cleaned_data["name"]
+            group.save()
 
             return redirect("/%s/" % group.name)
+        else:
+            print(form.errors)
 
     else:
         initial_dict = {

@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 def validate_name(name):
     for string in name.split(" "):
-        if not string.isalpha():
+        if not string.isalnum():
             raise ValidationError (
             _("Please enter only letters and numbers")
         )

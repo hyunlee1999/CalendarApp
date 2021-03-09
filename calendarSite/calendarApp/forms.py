@@ -10,13 +10,15 @@ class GroupForm(forms.Form):
     previous = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
-        cleanedData = super().clean()
+        cleanedData = super(GroupForm, self).clean()
         nameCleaned = cleanedData.get("name")
         if Group.objects.filter(name=nameCleaned).exists():
             raise ValidationError ("Error: A  group with that name already exists")
 
-    def clean_previous(self):
-        return self.fields['previous'].initial
+        if "previous" in self.initial:
+            cleanedData["previous"] = self.initial["previous"]
+
+        return cleanedData
 
 class TodoListForm(forms.Form):        
     parent= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
