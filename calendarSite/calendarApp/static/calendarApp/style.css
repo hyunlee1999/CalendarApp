@@ -6,9 +6,9 @@ h2 {
     color: purple;
 }
 
-/*ul {
+.sidebar ul {
    list-style: none; 
-}*/
+}
 
 /* The side navigation menu */
 .sidebar {
