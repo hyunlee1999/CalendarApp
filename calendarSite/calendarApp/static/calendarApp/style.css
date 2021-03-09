@@ -10,14 +10,6 @@ ul {
   list-style: none;
 }
 
-div.main {
-  width: 80%;
-	max-width: 1920px;
-	height: 100%;
-	margin: 0 auto;
-	position: relative;
-}
-
 /* The side navigation menu */
 .sidebar {
     margin: 0;
@@ -49,6 +41,15 @@ div.main {
     color: white;
   }
   
+  div.main {
+    width: 80%;
+    max-width: 1920px;
+    height: 100%;
+    position: relative;
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+  }
+
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
   div.content {
     margin-left: 200px;
