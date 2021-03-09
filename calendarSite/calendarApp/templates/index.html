@@ -23,7 +23,7 @@
             <p><a href="/{{group.name}}">{{group.name}}</a></p>
 
             <ul class="todoList">
-
+            <br>
             {% for todoList in todoLists %}  
               {% if todoList.getGroup == group.name %}
                 <li><a href="/{{todoList.group}}/{{todoList.name}}">{{todoList.name}}</a></li>
