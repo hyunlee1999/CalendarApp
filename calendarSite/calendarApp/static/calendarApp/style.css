@@ -71,6 +71,7 @@ h2 {
 
   .groups, .todoLists {
     background-color: grey;
+    padding-left: 1.5rem;
   }
 
   
