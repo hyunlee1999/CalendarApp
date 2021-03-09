@@ -62,6 +62,11 @@ ul {
   .indexOverview, .groupOverview {
     background-color: yellow;
     padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 2.5rem;
+    text-align: center;
+    width: 100%;
   }
 
   .groups, .todoLists {
