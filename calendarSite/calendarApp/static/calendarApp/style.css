@@ -60,7 +60,7 @@ ul {
 
   /* Dummy CSS for Divs in index.html. Please feel free to add any divs to index.html when necessary! */
   .indexOverview, .groupOverview {
-    background-color: yellow;
+    background-color: grey;
     padding: 30px;
   }
 
