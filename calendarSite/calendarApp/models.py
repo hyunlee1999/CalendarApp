@@ -20,6 +20,7 @@ class TodoList(models.Model):
 class TodoItem(models.Model):
     todoList = models.ForeignKey(TodoList, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, blank=True)
     completed = models.BooleanField(default=False)
     deadline = models.DateField()
 
