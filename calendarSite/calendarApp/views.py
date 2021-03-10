@@ -4,6 +4,7 @@ from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
+import datetime
 
 
 def index(request):
@@ -62,6 +63,10 @@ def makeNewTodoList(request):
     return render(request, "makeNewTodoList.html", {"form": form})
 
 def makeNewTodoItem(request):
+    initial_dict = {
+        "deadline": datetime.date.today,
+    }
+
     if request.method == "POST":
         form = TodoItemForm(request.POST)
 
@@ -78,7 +83,7 @@ def makeNewTodoItem(request):
 
 
     else:
-        form = TodoItemForm()
+        form = TodoItemForm(initial=initial_dict)
 
     return render(request, "makeNewTodoItem.html", {"form": form})
 
