@@ -18,6 +18,8 @@ urlpatterns = [
     #Edit
     path("edit/<str:group_>", views.editGroup, name="editGroup"),
     path("edit/<str:group_>/<str:todoList_>", views.editTodoList, name="editTodoList"),
+    path("edit/<str:group_>/<str:todoList_>/<str:todoItem_>", views.editTodoItem, name="editTodoItem"),
+
 
     #Ajax Requests
     path("ajax/delete", views.delete, name="delete"),

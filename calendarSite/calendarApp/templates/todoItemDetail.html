@@ -13,6 +13,7 @@
         {% else %}
         <p>Description: <span>N/A</span></p>
         {% endif %}
+        <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}/{{todoItem.name}}'">Edit TodoItem</button>
         <button id="delete">Delete</button>
     </div>
 

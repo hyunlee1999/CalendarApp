@@ -72,7 +72,7 @@ def makeNewTodoItem(request):
 
         if form.is_valid():
             newTodoItem = TodoItem()
-            parentList = TodoList.objects.get(name=form.cleaned_data["parentList"]) 
+            parentList = TodoList.objects.get(name=form.cleaned_data["parent"]) 
             newTodoItem.todoList = parentList
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
@@ -200,3 +200,43 @@ def editTodoList(request, group_, todoList_):
         form = TodoListForm(initial=initial_dict)
 
     return render(request, "editTodoList.html", {"form": form, "group": todoList.group, "name": todoList.name})
+
+
+def editTodoItem(request, group_, todoList_, todoItem_):
+
+    group = get_object_or_404(Group, name=group_)
+    todoList = get_object_or_404(TodoList, name=todoList_, group= group)
+    todoItem = get_object_or_404(TodoItem, name=todoItem_, todoList = todoList)
+
+    initial_dict = {
+        "name": todoItem.name,
+        "parent": todoList,
+        "previousParent": todoList.name,
+        "previousName": todoItem.name,
+        "deadline": todoItem.deadline,
+        "description": todoItem.description,
+    }
+
+    if request.method == "POST":
+
+        form = TodoItemForm(request.POST, initial=initial_dict)
+
+        if form.is_valid():
+            previousName = form.cleaned_data["previousName"]
+            previousParent = form.cleaned_data["previousParent"]
+            previousParent = get_object_or_404(TodoList, name=previousParent)
+            todoItem = get_object_or_404(TodoItem, name=previousName, todoList=previousParent)
+            todoItem.name =  form.cleaned_data["name"]
+            todoItem.todoList = get_object_or_404(TodoList, name=form.cleaned_data["parent"])
+            todoItem.description = form.cleaned_data["description"]
+            todoItem.deadline = form.cleaned_data["deadline"]
+
+            todoItem.save()
+
+            return redirect("/%s/%s/%s" % (todoList.group, todoList.name, todoItem.name))
+            
+    else:
+
+        form = TodoItemForm(initial=initial_dict)
+
+    return render(request, "editTodoItem.html", {"form": form, "group": todoList.group, "todoList": todoList.name, "name": todoItem.name})

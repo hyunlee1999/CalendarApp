@@ -45,15 +45,22 @@ class TodoListForm(forms.Form):
 
         
 class TodoItemForm(forms.Form):
-
-    parentList= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all())
+    parent= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all())
     name = forms.CharField(label="Todo Item Name:", max_length=100, validators=[validate_name])
     deadline = forms.DateField(widget = forms.SelectDateWidget(), label="(Optional) Deadline:", required=False)
     description = forms.CharField(label="Optional: Description:", max_length=200, required=False)
+    previousParent = forms.CharField(widget=forms.HiddenInput(), required=False)
+    previousName = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleanedData = super().clean()
         nameCleaned = cleanedData.get("name")
-        parentList = cleanedData.get("parentList")
-        if TodoItem.objects.filter(name=nameCleaned, todoList=parentList).exists():
-            raise ValidationError ("Error: A Todo Item with that name already exists in" + str(parentList) + "list")
+        parentList = cleanedData.get("parent")
+        if TodoItem.objects.filter(name=nameCleaned, todoList=parentList).exists() and cleanedData.get("previousName") != cleanedData.get("name"):
+            raise ValidationError ("Error: A Todo Item with that name already exists in " + str(parentList) + " list")
+
+        if "previousParent" in self.initial:
+            cleanedData["previousParent"] = self.initial["previousParent"]
+
+        if "previousName" in self.initial:
+            cleanedData["previousName" ] = self.initial["previousName"]
