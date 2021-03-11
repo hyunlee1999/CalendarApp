@@ -3,7 +3,7 @@
 {% block content %}
 <div class="content">
     <h2>Make New TodoList</h2>
-    <form action="makeNewTodoList" method="post">
+    <form action="/makeNewTodoList" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit">
