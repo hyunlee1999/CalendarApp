@@ -43,11 +43,21 @@ def makeNewGroup(request):
 
     return render(request, "makeNewGroup.html", {"form": form})
 
-def makeNewTodoList(request):
+def makeNewTodoList(request, group=None):
+
     groupList = Group.objects.all()
 
+    if group != None:
+        
+        initial_dict = {
+            "parent": Group.objects.get(name=group),
+        }
+
+    else:
+        initial_dict = {}
+
     if request.method == "POST":
-        form = TodoListForm(request.POST)
+        form = TodoListForm(request.POST, initial=initial_dict)
 
         if form.is_valid():
             newTodoList = TodoList()
@@ -58,14 +68,26 @@ def makeNewTodoList(request):
             return redirect("/%s/%s" % (parentGroup, newTodoList.name))
 
     else:
-        form = TodoListForm()
+        form = TodoListForm(initial=initial_dict)
 
     return render(request, "makeNewTodoList.html", {"form": form})
 
-def makeNewTodoItem(request):
-    initial_dict = {
-        "deadline": datetime.date.today,
-    }
+def makeNewTodoItem(request, group=None, todoList=None):
+
+    if group != None:
+
+        group =  Group.objects.get(name=group)
+        todoList = TodoList.objects.get(name=todoList, group=group)
+        
+        initial_dict = {
+            "deadline": datetime.date.today,
+            "parent": todoList,
+        }
+
+    else:
+        initial_dict = {
+            "deadline": datetime.date.today,
+        }
 
     if request.method == "POST":
         form = TodoItemForm(request.POST)
