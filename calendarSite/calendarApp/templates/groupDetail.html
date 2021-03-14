@@ -7,7 +7,7 @@
 
             <div class="groupOverview">
                 {% if todoLists %}
-                    <h2>TodoLists in Group {{ group.name }}</h2>
+                    <h2>TodoLists in Group {{ group.name }}</h2><br>
                     {% for todoList in todoLists %}
                     <div class="todoLists">
                         <p><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></p>
