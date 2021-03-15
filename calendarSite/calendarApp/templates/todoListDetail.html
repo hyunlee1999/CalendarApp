@@ -17,6 +17,7 @@
         <p>There is no todoItems for this todoLists</p>
         {% endif %}
 
+        <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <button onclick="location.href='/add/{{group.name}}/{{todoList.name}}'">Add New Item</button>
         <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}'">Edit TodoList</button>
         <button id="delete">Delete</button>
