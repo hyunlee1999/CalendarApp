@@ -26,6 +26,9 @@
             <p>There is no todoLists for this group</p>
             {% endif %}
             <br>
+
+            <a href="javascript:history.go(-1)">Previous Page</a>
+
             <button onclick="location.href='/edit/{{group.name}}'">Edit Group</button>
 
             <button onclick="location.href='/add/{{group.name}}'">Add New TodoList</button>
