@@ -45,7 +45,7 @@ class TodoListForm(forms.Form):
 
         
 class TodoItemForm(forms.Form):
-    parent= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all()) <br>
+    parent= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all()) 
     name = forms.CharField(label="Todo Item Name:", max_length=100, validators=[validate_name])
     deadline = forms.DateField(widget = forms.SelectDateWidget(), label="(Optional) Deadline:", required=False)
     description = forms.CharField(label="(Optional) Description:", max_length=200, required=False)
