@@ -6,7 +6,7 @@
     <form action="/makeNewGroup" method="post">
         {% csrf_token %}
         {{ form }}
-        <br>
+        <br><br>
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <input type="submit" value="Submit">
     </form>
