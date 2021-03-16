@@ -70,7 +70,9 @@ h2 {
 
   .groups, .todoLists {
     background-color: white;
-    padding-left: 1.5rem;
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px; 
   }
 
   
