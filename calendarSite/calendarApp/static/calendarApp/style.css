@@ -125,5 +125,5 @@ form label {
 }
 
 form input {
-  resize: vertical;
+  resize: both;
 }
