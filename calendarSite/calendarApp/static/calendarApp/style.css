@@ -121,3 +121,7 @@ form label {
   padding-top: 6px;
   display:block;
 }
+
+form id_parent {
+  border-radius:10px;
+}
