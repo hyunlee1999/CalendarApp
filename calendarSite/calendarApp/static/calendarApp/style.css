@@ -59,7 +59,7 @@ h2 {
 
 
   /* Dummy CSS for Divs in index.html. Please feel free to add any divs to index.html when necessary! */
-  .indexOverview, .groupOverview {
+  .indexOverview, .groupOverview, form {
     background-color: #B9DCDC;
     padding: 30px;
     display: grid;
