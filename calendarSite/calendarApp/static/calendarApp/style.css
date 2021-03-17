@@ -121,3 +121,7 @@ form label {
   display:block;
 
 }
+
+form id_name {
+  border-radius:10px;
+}
