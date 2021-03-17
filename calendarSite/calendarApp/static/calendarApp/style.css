@@ -113,11 +113,11 @@ form {
   background-color: #B9DCDC;
   max-width: 600px;
   padding: 25px;
+  border-radius:10px;
 }
 
 form label {
   font-size: 17px;
   padding-top: 6px;
   display:block;
-  border-radius:10px;
 }
