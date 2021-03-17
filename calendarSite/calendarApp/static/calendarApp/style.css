@@ -113,7 +113,6 @@ form {
   background-color: #B9DCDC;
   max-width: 600px;
   padding: 25px;
-  border-radius:10px;
 }
 
 form label {
@@ -122,6 +121,6 @@ form label {
   display:block;
 }
 
-form select, label {
+form select, input {
   border-radius:10px;
 }
