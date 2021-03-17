@@ -106,3 +106,18 @@ footer {
   background-color: #B9DCDC;
   color: black;
 }
+
+
+
+form {
+  background-color: #B9DCDC;
+  max-width: 600px;
+  padding: 25px;
+}
+
+form label {
+  font-size: 20px;
+  padding-top: 10px;
+  display:block;
+
+}

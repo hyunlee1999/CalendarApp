@@ -42,7 +42,6 @@ class TodoListForm(forms.Form):
 
         return cleanedData
 
-
         
 class TodoItemForm(forms.Form):
     parent= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all()) 
