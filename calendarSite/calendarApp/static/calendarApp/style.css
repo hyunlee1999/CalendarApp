@@ -122,6 +122,6 @@ form label {
   display:block;
 }
 
-form id_parent {
+form select, label {
   border-radius:10px;
 }
