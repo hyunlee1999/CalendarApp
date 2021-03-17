@@ -123,3 +123,7 @@ form label {
   padding-top: 6px;
   display:block;
 }
+
+form input {
+  resize: vertical;
+}
