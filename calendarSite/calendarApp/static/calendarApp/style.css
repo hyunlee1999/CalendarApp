@@ -12,7 +12,7 @@ h2 {
 
 .sidebar ul {
    list-style: none; 
-   padding-inline: center;
+   padding-inline-start: .5rem;
 }
 
 /* The side navigation menu */
