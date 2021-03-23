@@ -130,5 +130,5 @@ form label {
 }
 
 form input {
-  
+  display: inline-block;
 }
