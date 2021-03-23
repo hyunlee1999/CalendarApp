@@ -10,8 +10,10 @@ h2 {
     color: purple;
 }
 
-.logoPadding{
-  padding: center;
+.logoPadding {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sidebar ul {
