@@ -18,6 +18,7 @@ h2 {
    list-style: none; 
    padding-inline-start: .5rem;
    padding-inline-end: .5rem;
+   text-align: center;
 }
 
 /* The side navigation menu */
