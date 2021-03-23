@@ -10,9 +10,14 @@ h2 {
     color: purple;
 }
 
+.sidebar img {
+  padding: center;
+}
+
 .sidebar ul {
    list-style: none; 
    padding-inline-start: .5rem;
+   padding-inline-end: .5rem;
 }
 
 /* The side navigation menu */
