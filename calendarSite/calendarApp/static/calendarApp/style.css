@@ -130,5 +130,10 @@ form label {
 }
 
 form input {
+  display: block;
+  width: 100%;
+  overflow: hidden;
   resize: both;
+  min-height: 40px;
+  line-height: 20px;
 }
