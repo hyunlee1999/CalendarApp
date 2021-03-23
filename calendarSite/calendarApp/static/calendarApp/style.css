@@ -133,7 +133,7 @@ form input {
 }
 
 .logoPadding {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
