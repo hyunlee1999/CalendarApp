@@ -10,10 +10,6 @@ h2 {
     color: purple;
 }
 
-.logoPadding {
-  text-align: center !important;
-}
-
 .sidebar ul {
    list-style: none; 
    padding-inline-start: .5rem;
