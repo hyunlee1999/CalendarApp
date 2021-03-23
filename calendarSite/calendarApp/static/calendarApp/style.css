@@ -11,7 +11,7 @@ h2 {
 }
 
 .sidebar img {
-  padding: center;
+  padding-inline: center;
 }
 
 .sidebar ul {
