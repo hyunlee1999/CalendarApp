@@ -10,12 +10,6 @@ h2 {
     color: purple;
 }
 
-.logoPadding {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .sidebar ul {
    list-style: none; 
    padding-inline-start: .5rem;
@@ -136,4 +130,10 @@ form label {
 
 form input {
   resize: both;
+}
+
+.logoPadding {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
