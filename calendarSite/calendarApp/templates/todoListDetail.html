@@ -3,24 +3,26 @@
 {% block content %}
 <div class="content">
     <div class="detail">
-    <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
-        <p>This TodoList belongs to <a href="/{{group.name}}"><span> {{ group.name }}</span></a> </p>
-        {% if todoItems %}
-        <h2>TodoItems in List {{ todoList.name }}</h2>
-        <ul>
-            {% for todoItem in todoItems %}
-            <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="formContent">
+        <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
+            <p>This TodoList belongs to <a href="/{{group.name}}"><span> {{ group.name }}</span></a> </p>
+            {% if todoItems %}
+            <h2>TodoItems in List {{ todoList.name }}</h2>
+            <ul>
+                {% for todoItem in todoItems %}
+                <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
+                {% endfor %}
+            </ul>
 
-        {% else %}
-        <p>There is no todoItems for this todoLists</p>
-        {% endif %}
+            {% else %}
+            <p>There is no todoItems for this todoLists</p>
+            {% endif %}
 
-        <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
-        <button onclick="location.href='/add/{{group.name}}/{{todoList.name}}'">Add New Item</button>
-        <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}'">Edit TodoList</button>
-        <button id="delete">Delete</button>
+            <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
+            <button onclick="location.href='/add/{{group.name}}/{{todoList.name}}'">Add New Item</button>
+            <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}'">Edit TodoList</button>
+            <button id="delete">Delete</button>
+        </div>
     </div>
 
 </div>

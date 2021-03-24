@@ -2,11 +2,13 @@
 
 {% block content %}
 <div class="content">
+    <div class="formContent">
     <h2>Edit TodoList {{name}}</h2>
     <form action="{{name}}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit">
     </form>
+    </div>
 </div>
 {% endblock %}
