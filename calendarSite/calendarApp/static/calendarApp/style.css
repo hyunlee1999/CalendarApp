@@ -129,7 +129,7 @@ form label {
   display: block;
 }
 
-form input {
+form #id_name {
   display: block;
   width: 100%;
   overflow: hidden;
