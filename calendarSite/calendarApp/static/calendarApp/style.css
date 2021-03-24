@@ -44,9 +44,8 @@ a:active {
 }
 
 .topbar {
-  margin: 0;
-  padding-left: 200px;
-  width: 83%;
+  margin-left: 210px;
+  width: 82%;
   background-color: #f1f1f1;
   position: fixed;
   height: 157px;
