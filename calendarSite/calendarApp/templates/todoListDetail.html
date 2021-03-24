@@ -5,7 +5,7 @@
     <div class="detail">
         <div class="formContent">
         <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
-            <p>This TodoList belongs to <a href="/{{group.name}}"><span> {{ group.name }}</span></a> </p>
+            <p>This TodoList belongs to <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></b> </p>
             {% if todoItems %}
             <h2>TodoItems in List {{ todoList.name }}</h2>
             <ul>
@@ -31,7 +31,7 @@
     <script>
         $("#delete").click(function () {
             if (window.confirm("Are you sure that you want to delete?")){
-
+c
 
                 var name = $("#name").text();
 

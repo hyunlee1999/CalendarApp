@@ -5,14 +5,14 @@
     <div class="detail">
         <div class="formContent">
         <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
-        <p>This TodoItem belongs to Group <a href="/{{group.name}}"><span> {{ group.name }}</span></a></p>
-        <p>This TodoItem belongs to todoList <a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a> </p>
+        <p>This TodoItem belongs to Group <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></p></b>
+        <p>This TodoItem belongs to TodoList<b><a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a></b> </p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
 
         {% if todoItem.description %}
-        <p>Description: <span> {{todoItem.description}}</span></p>
+            <p>Description: <span> {{todoItem.description}}</span></p>
         {% else %}
-        <p>Description: <span>N/A</span></p>
+            <p>Description: <span>N/A</span></p>
         {% endif %}
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}/{{todoItem.name}}'">Edit TodoItem</button>

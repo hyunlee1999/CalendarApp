@@ -4,30 +4,31 @@
 <div class="content">
     <div class="detail">
         <div class="formContent">
-        <h2>Group <span id="name">{{ group.name }}<span></h2>
-
+        {% if todoLists %}
+        <h2>TodoLists in Group {{ group.name }}</h2>
             <div class="groupOverview">
-                {% if todoLists %}
-                    <h2>TodoLists in Group {{ group.name }}</h2><br><br>
-                    {% for todoList in todoLists %}
-                    <div class="todoLists">
-                        <p><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></p>
-                            <ul>
-                                {% for todoItem in todoItems %}
-                                    {% if todoItem.getTodoList == todoList.name %}
-                                        <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                    </div>
-                    {% endfor %}
+                {% for todoList in todoLists %}
+                <div class="todoLists">
+                    <p><a href="/{{group.name}}/{{todoList.name}}">{{ todoList.name }}</a></p>
+                        <ul>
+                            {% for todoItem in todoItems %}
+                                {% if todoItem.getTodoList == todoList.name %}
+                                    <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                </div>
+                {% endfor %}
+
             </div>
+
+
         </div>
 
-            {% else %}
+        {% else %}
             <p>There is no todoLists for this group</p>
-            {% endif %}
-            <br>
+        {% endif %}
+        <br>
 
             <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
 
