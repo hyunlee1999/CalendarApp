@@ -65,7 +65,6 @@ a:active {
 
   .sidebar #sidebarOverviewItems {
     color: purple;
-    text-decoration: disc !important;
   }
   
   .sidebar #sidebarOverviewHeading {
