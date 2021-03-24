@@ -67,6 +67,12 @@ a:active {
     text-decoration: dotted !important;
   }
   
+  .sidebar #sidebarOverviewHeading {
+    color: green;
+
+  }
+
+
   /* Active/current link */
   .sidebar a.active {
     background-color: #4CAF50;
