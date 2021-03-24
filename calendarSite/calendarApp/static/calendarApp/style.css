@@ -63,7 +63,7 @@ a:active {
     text-decoration: none;
   }
 
-  .sidebarOverview {
+  .sidebarOverview li {
     text-decoration: dotted !important;
   }
   
