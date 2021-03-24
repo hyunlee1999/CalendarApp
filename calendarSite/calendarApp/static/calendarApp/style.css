@@ -55,6 +55,7 @@ a:active {
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 0px 1px black inset;
+  z-index: 999;
 }
 
 /* The side navigation menu */
