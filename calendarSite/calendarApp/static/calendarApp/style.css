@@ -112,6 +112,7 @@ a:active {
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     grid-gap: 2.5rem;
     border-radius:10px;
+    outline: 2px solid blue;
   }
 
   .groups, .todoLists {
