@@ -131,8 +131,9 @@ a:active {
   .groups, .todoLists {
     background-color: #B9DCDC;
     padding-left: 1.5rem;
-    /*border-radius:10px;*/
+    border-radius:10px;
     outline: 2px solid black;
+    box-shadow: 0px 0px 0px 1px black inset;
   }
 
   
