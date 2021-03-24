@@ -64,9 +64,10 @@ a:active {
   }
 
   .sidebar #sidebarOverviewItems {
+    display: block;
     list-style-type: disc;
     color: purple;
-    padding: 16px;
+    padding-left: 16px;
   }
   
   .sidebar #sidebarOverviewHeading {
