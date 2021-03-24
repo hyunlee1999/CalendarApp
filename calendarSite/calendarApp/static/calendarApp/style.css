@@ -48,7 +48,7 @@ a:active {
   width: 82%;
   background-color: #f1f1f1;
   position: fixed;
-  height: 157px;
+  height: 85px;
   overflow: auto;
   border-radius:10px;
   display: flex;
@@ -110,7 +110,7 @@ a:active {
     height: 100%;
     position: relative;
     padding-left: 1.5rem;
-    padding-top: 11.5rem;
+    padding-top: 7.5rem;
   }
 
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
