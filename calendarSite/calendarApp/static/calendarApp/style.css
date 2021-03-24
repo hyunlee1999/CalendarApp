@@ -108,7 +108,7 @@ a:active {
     height: 100%;
     position: relative;
     padding-left: 1.5rem;
-    padding-top: 1.5rem;
+    padding-top: 157px;
   }
 
   /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
@@ -116,7 +116,6 @@ a:active {
     margin-left: 200px;
     padding: 1px 16px;
     height: 1000px; 
-    margin-top: 157px;
   }
 
 
