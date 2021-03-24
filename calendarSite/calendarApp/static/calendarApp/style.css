@@ -64,7 +64,7 @@ a:active {
   }
 
   .sidebarOverview {
-    text-decoration: dotted;
+    text-decoration: dotted !important;
   }
   
   /* Active/current link */
