@@ -31,7 +31,8 @@ urlpatterns = [
     #Ajax Requests
     path("ajax/delete", views.delete, name="delete"),
     path("ajax/completed", views.completed, name="completed"),
-    path("ajax/uncompleted", views.uncompleted, name="completed"),
+    path("ajax/uncompleted", views.uncompleted, name="uncompleted"),
+    path("completed", views.completedItems, name="completedItems"),
 
 
 

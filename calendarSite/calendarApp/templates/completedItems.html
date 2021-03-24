@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="detail">
+        <div class="formContent">
+        <h2>Completed Items</h2>
+        {% if todoItems%}
+            {% for todoItem in todoItems %}
+            <li><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></li>
+            {% endfor %}
+        {% endif %}
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

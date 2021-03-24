@@ -121,6 +121,10 @@ def todoItemDetail(request, group, todoList, todoItem):
     todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
     return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
 
+def completedItems(request):
+    todoItems = TodoItem.objects.all().filter(completed=True)
+    return render(request, "completedItems.html", {"todoItems": todoItems})
+
 def delete(request):
     type = request.GET.get("type")
     name = request.GET.get("name")
