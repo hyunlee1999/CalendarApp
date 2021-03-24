@@ -14,9 +14,11 @@
         {% else %}
             <p>Description: <span>N/A</span></p>
         {% endif %}
+        <div id="completedText"></div>
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}/{{todoItem.name}}'">Edit TodoItem</button>
         <button id="delete">Delete</button>
+        <button id="completed">Mark Complete</button>
         </div>
     </div>
 
@@ -29,8 +31,6 @@
             if (window.confirm("Are you sure that you want to delete?")){
 
                 var name = $("#name").text();
-                console.log(name);
-
                 $.ajax({
                     url: "/ajax/delete",
                     data: {
@@ -54,5 +54,31 @@
             }
 
         });
+
+        $("#completed").click(function () {
+            var name = $("#name").text();
+
+            $.ajax({
+                url: "/ajax/completed",
+                data: {
+                    "name": name,
+                },
+                dataType: "json",
+                success: function(data){
+                    if (data.isComplete){
+                        $(".detail").remove()
+
+                        g = document.createElement('p');
+                        g.setAttribute("class", "formContent");
+                        g.innerHTML = "This TodoItem is deleted";
+                        
+                        $(".content").append(g);
+
+                    }
+                }
+            })
+        });
     </script>
+
+
 {% endblock %}
