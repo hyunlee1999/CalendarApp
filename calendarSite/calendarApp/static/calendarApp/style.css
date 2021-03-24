@@ -62,6 +62,10 @@ a:active {
     padding: 16px;
     text-decoration: none;
   }
+
+  .sidebarOverview {
+    text-decoration: dotted;
+  }
   
   /* Active/current link */
   .sidebar a.active {
