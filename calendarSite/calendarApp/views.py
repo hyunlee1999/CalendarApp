@@ -126,7 +126,7 @@ def delete(request):
     name = request.GET.get("name")
     if (type == "group"):
 
-        object = Group.objects.all().filter(name = name)
+        object = Group.objects.all().get(name = name)
         object.delete()
 
         data = {
@@ -136,7 +136,7 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoList"):
-        object = TodoList.objects.all().filter(name = name)
+        object = TodoList.objects.all().get(name = name)
         object.delete()
 
         data = {
@@ -146,13 +146,35 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoItem"):
-        object = TodoItem.objects.all().filter(name = name)
+        object = TodoItem.objects.all().get(name = name)
         object.delete()
     
     data = {
         "isDeleted":True,
     }
 
+    return JsonResponse(data)
+
+def completed(request):
+    name = request.GET.get("name")
+   
+    object = TodoItem.objects.all().get(name = name)
+    object.completed = True
+    object.save()
+
+    data = {}
+    
+    return JsonResponse(data)
+
+def uncompleted(request):
+    name = request.GET.get("name")
+   
+    object = TodoItem.objects.all().get(name = name)
+    object.completed = False
+    object.save()
+
+    data = {}
+    
     return JsonResponse(data)
 
 def editGroup(request, group_):
