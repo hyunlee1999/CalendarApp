@@ -64,7 +64,7 @@ a:active {
   }
 
   .sidebar #sidebarOverviewItems {
-    text-decoration: dotted !important;
+    text-decoration: disc !important;
   }
   
   .sidebar #sidebarOverviewHeading {
