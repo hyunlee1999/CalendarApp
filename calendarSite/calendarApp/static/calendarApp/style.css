@@ -59,14 +59,14 @@ a:active {
   .sidebar a {
     display: block;
     color: black;
-    padding: 24px;
+    padding: 16px;
     text-decoration: none;
   }
 
   .sidebar #sidebarOverviewItems {
     list-style-type: disc;
     color: purple;
-    padding-left: 16px;
+    padding-left: 24px;
     text-align: auto;
   }
   
