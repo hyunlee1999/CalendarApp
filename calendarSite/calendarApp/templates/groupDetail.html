@@ -3,6 +3,7 @@
 {% block content %}
 <div class="content">
     <div class="detail">
+        <div class="formContent">
         <h2>Group <span id="name">{{ group.name }}<span></h2>
 
             <div class="groupOverview">
@@ -21,6 +22,7 @@
                     </div>
                     {% endfor %}
             </div>
+        </div>
 
             {% else %}
             <p>There is no todoLists for this group</p>
