@@ -66,7 +66,7 @@ a:active {
   .sidebar #sidebarOverviewItems {
     list-style-type: disc;
     color: purple;
-    padding-inline-start: .5rem;
+    padding-left: .5rem;
     text-align: auto;
   }
   
