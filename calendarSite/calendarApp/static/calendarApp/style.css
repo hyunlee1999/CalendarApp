@@ -130,7 +130,6 @@ form label {
 }
 
 form #id_description {
-  display: block;
   width: 100%;
   overflow: hidden;
   resize: both;
