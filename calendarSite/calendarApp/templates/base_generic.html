@@ -22,15 +22,16 @@
                     <a href="/"><img src="{% static 'calendarApp/calendarAppLogo1.png' %}" alt="Logo for Calendar Application" style="height: 100px;"></a>
                     </div>
                 </li>
+                <hr>
                 <li>
                     <h2 id="sidebarOverviewHeading">Overview</h2>
-                        <hr>
                         <ul id="sidebarOverviewItems">
                         <li><strong>Groups:</strong> {{ num_Groups }}</li>
                         <li><strong>Todo List:</strong> {{ num_TodoList }}</li>
                         <li><strong>Todo Item:</strong> {{ num_TodoItem }}</li>
                         </ul>
                 </li>
+                <hr>
                 <br>
                 <li><a href="/makeNewGroup">Make New Group</a></li>
                 <li><a href="/makeNewTodoList">Make New Todo List</a></li>
