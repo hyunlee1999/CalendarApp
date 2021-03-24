@@ -14,6 +14,7 @@ h2 {
 
 .logoPadding{
   padding: center;
+  text-align: center;
 }
 
 .sidebar ul {
@@ -32,7 +33,6 @@ h2 {
     height: 100%;
     overflow: auto;
     border-radius:10px;
-    text-align: center;
   }
   
   /* Sidebar links */
