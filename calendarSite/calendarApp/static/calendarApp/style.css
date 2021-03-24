@@ -67,7 +67,7 @@ a:active {
     list-style-type: disc;
     color: purple;
     padding-left: 16px;
-    text-align: center;
+    text-align: auto;
   }
   
   .sidebar #sidebarOverviewHeading {
