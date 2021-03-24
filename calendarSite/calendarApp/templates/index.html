@@ -20,7 +20,8 @@
 
         {% for group in groups %}
           <div class="groups">
-            <p><a href="/{{group.name}}">{{group.name}}</a></p>
+            <h1><a href="/{{group.name}}">{{group.name}}</a></h1>
+            <p>
 
             <ul class="todoList">
             
@@ -31,6 +32,7 @@
             {% endfor %}
 
             </ul>
+          </p>
 
           </div>
         {% endfor %}

@@ -3,7 +3,6 @@
 {% block content %}
 <div class="content">
     <h2>Make New Group</h2>
-    <div class="textArea">
     <form action="/makeNewGroup" method="post">
         {% csrf_token %}
         {{ form }}
@@ -11,6 +10,5 @@
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <input type="submit" value="Submit">
     </form>
-    </div>
 </div>
 {% endblock %}
