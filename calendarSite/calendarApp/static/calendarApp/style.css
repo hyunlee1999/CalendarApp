@@ -65,13 +65,11 @@ a:active {
 
   .sidebar #sidebarOverviewItems {
     list-style-type: disc;
-    color: purple;
     padding-left: 36px;
     text-align: auto;
   }
   
   .sidebar #sidebarOverviewHeading {
-    color: green;
     padding-inline-start: .65rem;
     padding-bottom: 0px;
 
