@@ -72,7 +72,7 @@ a:active {
   
   .sidebar #sidebarOverviewHeading {
     color: green;
-    padding-left: 36px;
+    padding-inline-start: .5rem;
 
   }
 
