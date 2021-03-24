@@ -64,7 +64,7 @@ a:active {
   }
 
   .sidebar #sidebarOverviewItems {
-    display: list-item;
+    list-style-type: disc;
     color: purple;
   }
   
