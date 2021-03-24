@@ -105,13 +105,13 @@ def makeNewTodoItem(request, group=None, todoList=None):
 def groupDetail(request, group):
     group = get_object_or_404(Group, name=group)
     childLists = TodoList.objects.all().filter(group=group)
-    todoItems = TodoItem.objects.all()
+    todoItems = TodoItem.objects.all().filter(completed=False)
     return render(request, "groupDetail.html", {"group": group, "todoLists": childLists, "todoItems": todoItems})
     
 def todoListDetail(request, group, todoList):
     group = get_object_or_404(Group, name=group)
     todoList = get_object_or_404(TodoList, name=todoList, group=group)
-    childItems = TodoItem.objects.all().filter(todoList = todoList)
+    childItems = TodoItem.objects.all().filter(todoList = todoList, completed=False)
         
     return render(request, "todoListDetail.html", {"group": group, "todoList": todoList, "todoItems": childItems})
 

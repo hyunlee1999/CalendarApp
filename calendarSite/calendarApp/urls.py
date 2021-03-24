@@ -34,6 +34,4 @@ urlpatterns = [
     path("ajax/uncompleted", views.uncompleted, name="uncompleted"),
     path("completed", views.completedItems, name="completedItems"),
 
-
-
 ]
