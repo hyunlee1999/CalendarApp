@@ -13,7 +13,8 @@
                         <ul>
                             {% for todoItem in todoItems %}
                                 {% if todoItem.getTodoList == todoList.name %}
-                                    <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}</a></li>
+                                    <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}
+                                    {% if todoItem.deadline%} (Deadline: {{todoItem.deadline}}) {% endif %}</a></li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
