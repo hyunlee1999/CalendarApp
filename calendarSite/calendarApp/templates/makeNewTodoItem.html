@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="content">
+    <div class='formContent'>
     <h2>Make New TodoItem</h2>
     <form action="/makeNewTodoItem" method="post">
         {% csrf_token %}
@@ -10,5 +11,6 @@
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <input type="submit" value="Submit">
     </form>
+    </div>
 </div>
 {% endblock %}
