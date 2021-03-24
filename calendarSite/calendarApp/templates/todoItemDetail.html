@@ -3,6 +3,7 @@
 {% block content %}
 <div class="content">
     <div class="detail">
+        <div class="formContent">
         <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
         <p>This TodoItem belongs to Group <a href="/{{group.name}}"><span> {{ group.name }}</span></a></p>
         <p>This TodoItem belongs to todoList <a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a> </p>
@@ -16,6 +17,7 @@
         <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}/{{todoItem.name}}'">Edit TodoItem</button>
         <button id="delete">Delete</button>
+        </div>
     </div>
 
 </div>
