@@ -181,7 +181,6 @@ form {
   background-color: #B9DCDC;
   max-width: 600px;
   padding: 30px;
-  margin-top: 11.5rem;
   border-radius:10px;
 }
 
@@ -197,4 +196,8 @@ form #id_description {
   resize: both;
   min-height: 40px;
   line-height: 20px;
+}
+
+.formContent {
+  margin-top: 11.5rem;
 }
