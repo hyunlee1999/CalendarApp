@@ -74,10 +74,13 @@ def makeNewTodoItem(request, group=None, todoList=None):
         
         initial_dict = {
             "parent": todoList,
+            "importanceLevel": 0,
         }
 
     else:
-        initial_dict = {}
+        initial_dict = {
+            "importanceLevel": 0,
+        }
 
     if request.method == "POST":
         form = TodoItemForm(request.POST)
@@ -89,6 +92,7 @@ def makeNewTodoItem(request, group=None, todoList=None):
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.description = form.cleaned_data["description"]
+            newTodoItem.importanceLevel = form.cleaned_data["importantLevel"]
             newTodoItem.completed = False
             newTodoItem.save()
             return redirect("/%s/%s/%s" % (parentList.group, parentList.name, newTodoItem.name))
@@ -253,6 +257,7 @@ def editTodoItem(request, group_, todoList_, todoItem_):
         "previousName": todoItem.name,
         "deadline": todoItem.deadline,
         "description": todoItem.description,
+        "importanceLevel": todoItem.importanceLevel,
     }
 
     if request.method == "POST":
@@ -268,6 +273,7 @@ def editTodoItem(request, group_, todoList_, todoItem_):
             todoItem.todoList = get_object_or_404(TodoList, name=form.cleaned_data["parent"])
             todoItem.description = form.cleaned_data["description"]
             todoItem.deadline = form.cleaned_data["deadline"]
+            todoItem.importanceLevel = form.cleaned_data["importanceLevel"]
 
             todoItem.save()
 

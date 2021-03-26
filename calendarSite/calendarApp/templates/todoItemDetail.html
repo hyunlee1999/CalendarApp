@@ -7,6 +7,7 @@
         <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
         <p>This TodoItem belongs to Group <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></p></b>
         <p>This TodoItem belongs to TodoList<b><a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a></b> </p>
+        <p>Importance Level: {{todoItem.importanceLevel}}</p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
 
         {% if todoItem.description %}
