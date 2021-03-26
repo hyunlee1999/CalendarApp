@@ -124,7 +124,33 @@ def todoItemDetail(request, group, todoList, todoItem):
 
 def completedItems(request):
     todoItems = TodoItem.objects.all().filter(completed=True)
-    return render(request, "completedItems.html", {"todoItems": todoItems})
+
+    today = datetime.date.today()
+    week = today - datetime.timedelta(days=7)
+    thirty = today - datetime.timedelta(days=30)
+    year = today - datetime.timedelta(days=365)
+
+    todayCount = weekCount = thirtyCount = yearCount = 0
+
+    for todoItem in todoItems:
+        completedDate = todoItem.completedDate
+        if  completedDate == today:
+            todayCount = todayCount + 1
+        if today <= completedDate <= week:
+            weekCount = weekCount + 1
+        if today <= completedDate <= thirty:
+            thirtyCount = thirtyCount + 1
+        if today <= completedDate <= year:
+            yearCount = yearCount + 1
+    
+    return render(request, "completedItems.html", 
+        {
+            "todoItems": todoItems,
+            "todayCount": todayCount,
+            "weekCount": weekCount,
+            "thirtyCount": thirtyCount,
+            "yearCount": yearCount,
+        })
 
 def delete(request):
     type = request.GET.get("type")

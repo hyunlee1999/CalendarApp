@@ -4,14 +4,25 @@
 <div class="content">
     <div class="detail">
         <div class="formContent">
-        <h2>Completed Items</h2>
-        {% if todoItems%}
+            <h2>Statistics</h2>
+            <p>Number of Tasks Completed in:</p>
             <ul>
-            {% for todoItem in todoItems %}
-            <li><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></li>
-            {% endfor %}
+                <li>Today: {{todayCount}}</li>
+                <li>Week: {{weekCount}}</li>
+                <li>30 Days: {{thirtyCount}}</li>
+                <li>Year: {{yearCount}}</li>
             </ul>
-        {% endif %}
+            {% if todoItems%}
+                <h2>Completed Items</h2>
+
+                <ul>
+                {% for todoItem in todoItems %}
+                <li><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>You have not completed Items</p>
+            {% endif %}
         
         </div>
     </div>
