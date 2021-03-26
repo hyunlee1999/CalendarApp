@@ -6,15 +6,20 @@
         <div class="formContent">
             {% if todoItems%}
                 <h2>Active Items</h2>
-                <p>Sort By:</p>
-                <ul>
-                    <a id="sortImportance"><p>Importance Levels</p></a>
-                </ul>
-                <ul id="list">
+                <table id="myTable">
+                    <tr>
+                        <th>Name</th>
+                        <th id="importanceLevel"><u>Importance Level</u></th>
+                        <th>Deadline</th>
+                    </tr>         
                 {% for todoItem in todoItems %}
-                <li class="items"><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}} <span class="importanceLevel">({{todoItem.importanceLevel}})</span></a></li>
+                    <tr>
+                        <td><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></td>
+                        <td>{{todoItem.importanceLevel}}</td>
+                        <td>{{todoItem.deadline}}</td>
+                    </tr>
                 {% endfor %}
-                </ul>
+                </table>
             {% else %}
                 <p>You have no uncompleted items</p>
             {% endif %}
@@ -25,5 +30,48 @@
 {% endblock %}
 
 {% block javascript %}
+<script>
+    var isImportanceDescending = false;
+    
+    function sortTable(column, index, isDescending) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("myTable");
+        switching = true;
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[index];
+                y = rows[i + 1].getElementsByTagName("td")[index];
 
+                if (column == "importanceLevel" && !isDescending){
+                    if (x.innerHTML > y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (column == "importanceLevel" && isDescending){
+                    if (x.innerHTML < y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+    }
+
+    $("#importanceLevel").click(function() {
+        if (isImportanceDescending){
+            sortTable("importanceLevel", 1, true);
+            isImportanceDescending = false;
+        } else {
+            sortTable("importanceLevel", 1, false);
+            isImportanceDescending = true;
+        }
+    })
+</script>
 {% endblock %}

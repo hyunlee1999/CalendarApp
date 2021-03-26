@@ -92,7 +92,7 @@ def makeNewTodoItem(request, group=None, todoList=None):
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.description = form.cleaned_data["description"]
-            newTodoItem.importanceLevel = form.cleaned_data["importantLevel"]
+            newTodoItem.importanceLevel = form.cleaned_data["importanceLevel"]
             newTodoItem.completed = False
             newTodoItem.save()
             return redirect("/%s/%s/%s" % (parentList.group, parentList.name, newTodoItem.name))
