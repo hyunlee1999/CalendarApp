@@ -1,0 +1,29 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="detail">
+        <div class="formContent">
+            {% if todoItems%}
+                <h2>Active Items</h2>
+                <p>Sort By:</p>
+                <ul>
+                    <a id="sortImportance"><p>Importance Levels</p></a>
+                </ul>
+                <ul id="list">
+                {% for todoItem in todoItems %}
+                <li class="items"><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}} <span class="importanceLevel">({{todoItem.importanceLevel}})</span></a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>You have no uncompleted items</p>
+            {% endif %}
+        
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

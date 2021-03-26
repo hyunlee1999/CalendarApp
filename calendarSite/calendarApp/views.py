@@ -122,6 +122,11 @@ def todoItemDetail(request, group, todoList, todoItem):
     todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
     return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
 
+def uncompletedItems(request):
+    todoItems = TodoItem.objects.all().filter(completed=False)
+    
+    return render(request, "uncompletedItems.html", {"todoItems": todoItems})
+
 def completedItems(request):
     todoItems = TodoItem.objects.all().filter(completed=True)
 
@@ -209,6 +214,7 @@ def uncompleted(request):
     data = {}
     
     return JsonResponse(data)
+
 
 def editGroup(request, group_):
 
