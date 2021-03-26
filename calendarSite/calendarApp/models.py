@@ -23,6 +23,7 @@ class TodoItem(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200, blank=True)
     completed = models.BooleanField(default=False)
+    completedDate = models.DateField(null=True, blank=True)
     deadline = models.DateField(null=True, blank=True)
     importanceLevel = models.IntegerField(default=0, choices=CHOICES)
 

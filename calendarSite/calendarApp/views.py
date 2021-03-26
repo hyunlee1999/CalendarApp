@@ -164,6 +164,7 @@ def completed(request):
     name = request.GET.get("name")
    
     object = TodoItem.objects.all().get(name = name)
+    object.completedDate = datetime.date.today()
     object.completed = True
     object.save()
 
@@ -176,6 +177,7 @@ def uncompleted(request):
    
     object = TodoItem.objects.all().get(name = name)
     object.completed = False
+    object.completedDate = None
     object.save()
 
     data = {}
