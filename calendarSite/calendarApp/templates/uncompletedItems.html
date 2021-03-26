@@ -10,7 +10,7 @@
                     <tr>
                         <th id="name"><u>Name</u></th>
                         <th id="importanceLevel"><u>Importance Level</u></th>
-                        <th>Deadline</th>
+                        <th id="deadline"><u>Deadline</u></th>
                     </tr>         
                 {% for todoItem in todoItems %}
                     <tr>
@@ -33,6 +33,7 @@
 <script>
     var isImportanceDescending = false;
     var isNameDescending = false;
+    var isDeadlineDescending = false;
     
     function sortTable(column, index, isDescending) {
         var table, rows, switching, i, x, y, shouldSwitch;
@@ -66,6 +67,16 @@
                         shouldSwitch = true;
                         break;
                     }
+                } else if (column == "deadline" && !isDescending){
+                    if (x.innerHTML > y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (column == "deadline" && isDescending){
+                    if (x.innerHTML < y.innerHTML) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
             if (shouldSwitch) {
@@ -94,6 +105,17 @@
             isNameDescending = true;
         }
     })
+
+    $("#deadline").click(function() {
+        if (isDeadlineDescending){
+            sortTable("deadline", 2, true);
+            isDeadlineDescending = false;
+        } else {
+            sortTable("deadline", 2, false);
+            isDeadlineDescending = true;
+        }
+    })
+
 
 </script>
 {% endblock %}
