@@ -136,11 +136,11 @@ def completedItems(request):
         completedDate = todoItem.completedDate
         if  completedDate == today:
             todayCount = todayCount + 1
-        if today <= completedDate <= week:
+        if week <= completedDate <= today:
             weekCount = weekCount + 1
-        if today <= completedDate <= thirty:
+        if thirty <= completedDate <= today:
             thirtyCount = thirtyCount + 1
-        if today <= completedDate <= year:
+        if year <= completedDate <= today:
             yearCount = yearCount + 1
     
     return render(request, "completedItems.html", 
