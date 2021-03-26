@@ -73,14 +73,11 @@ def makeNewTodoItem(request, group=None, todoList=None):
         todoList = TodoList.objects.get(name=todoList, group=group)
         
         initial_dict = {
-            "deadline": datetime.date.today,
             "parent": todoList,
         }
 
     else:
-        initial_dict = {
-            "deadline": datetime.date.today,
-        }
+        initial_dict = {}
 
     if request.method == "POST":
         form = TodoItemForm(request.POST)
