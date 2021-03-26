@@ -8,7 +8,7 @@
                 <h2>Active Items</h2>
                 <table id="myTable">
                     <tr>
-                        <th>Name</th>
+                        <th id="name"><u>Name</u></th>
                         <th id="importanceLevel"><u>Importance Level</u></th>
                         <th>Deadline</th>
                     </tr>         
@@ -32,6 +32,7 @@
 {% block javascript %}
 <script>
     var isImportanceDescending = false;
+    var isNameDescending = false;
     
     function sortTable(column, index, isDescending) {
         var table, rows, switching, i, x, y, shouldSwitch;
@@ -55,6 +56,16 @@
                         shouldSwitch = true;
                         break;
                     }
+                } else if (column == "name" && !isDescending){
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }  else if (column == "name" && isDescending){
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
             if (shouldSwitch) {
@@ -73,5 +84,16 @@
             isImportanceDescending = true;
         }
     })
+
+    $("#name").click(function() {
+        if (isNameDescending){
+            sortTable("name", 0, true);
+            isNameDescending = false;
+        } else {
+            sortTable("name", 0, false);
+            isNameDescending = true;
+        }
+    })
+
 </script>
 {% endblock %}
