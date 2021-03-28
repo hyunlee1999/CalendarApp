@@ -194,3 +194,7 @@ form #id_description {
 .formContent {
   margin-top: 9rem;
 }
+ 
+.detail {
+  padding: 6px;
+}
