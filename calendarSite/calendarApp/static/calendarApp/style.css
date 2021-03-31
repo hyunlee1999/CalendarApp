@@ -197,6 +197,11 @@ form #id_description {
   margin-top: 9rem;
 }
 
+table {
+  border-spacing: 0 15px;
+}
+
+
 td {
   width: 150px;
   text-align: center;
@@ -204,8 +209,4 @@ td {
   padding: 7px;
   background-color: #B9DCDC;
   border-radius:10px;
-}
-
-tr {
-  padding: 7px;
 }
