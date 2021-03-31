@@ -128,7 +128,7 @@ a:active {
     border-radius:10px;
   }
 
-  .groups, .todoLists {
+  .groups, .todoLists, .detail {
     background-color: #B9DCDC;
     padding-left: 1.5rem;
     border-radius:10px;
