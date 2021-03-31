@@ -176,6 +176,7 @@ form {
   max-width: 600px;
   padding: 30px;
   border-radius:10px;
+  border: 1px solid black;
 }
 
 form label {
