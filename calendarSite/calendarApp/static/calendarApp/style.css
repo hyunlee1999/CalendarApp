@@ -189,7 +189,7 @@ form #id_description {
   width: 100%;
   overflow: auto;
   resize: both !important;
-  height: 25px !important;
+  height: 25px;
 }
 
 .formContent {
