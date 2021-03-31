@@ -188,7 +188,7 @@ form label {
 form #id_description {
   width: 100%;
   overflow: auto;
-  /* resize: both; */
+  resize: both !important;
   height: 25px !important;
 }
 
