@@ -19,8 +19,10 @@
 
                 <ul>
                 {% for todoItem in todoItems %}
+                <div class="stat">
                 <li><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></li>
                 {% endfor %}
+                </div>
                 </ul>
             {% else %}
                 <p>You have no completed Items</p>
