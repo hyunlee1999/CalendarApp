@@ -170,7 +170,7 @@ footer {
 }
 
 
-form {
+form, .detail {
   background-color: #B9DCDC;
   max-width: 600px;
   padding: 30px;
