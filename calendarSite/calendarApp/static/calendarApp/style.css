@@ -186,13 +186,10 @@ form label {
 }
 
 form #id_description {
-  /* width: 100%; */
+  width: 100%;
   overflow: auto;
   /* resize: both; */
-  /* min-height: 40px;
-  line-height: 20px; */
   height: 25px !important;
-  width: 220px !important;
 }
 
 .formContent {
