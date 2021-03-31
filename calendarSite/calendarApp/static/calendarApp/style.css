@@ -209,3 +209,12 @@ td {
   background-color: #B9DCDC;
   border-radius:10px;
 }
+
+.statli {
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 7px;
+  background-color: #B9DCDC;
+  border-radius:10px;
+}
