@@ -217,5 +217,5 @@ td {
   padding: 7px;
   background-color: #B9DCDC;
   border-radius:10px;
-  text-decoration: none !important;
+  list-style-type: none;
 }
