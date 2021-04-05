@@ -1,0 +1,222 @@
+body {
+  margin: 10px;
+}
+
+h1 {
+    font-weight: bold;
+    color: black; 
+
+}
+
+h2 {
+    color: black;
+}
+
+a {
+  color: black;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+.logoPadding{
+  padding: center;
+  text-align: center;
+}
+
+.sidebar ul {
+   list-style: none; 
+   padding-inline-start: .5rem;
+   padding-inline-end: .5rem;
+}
+
+.topbar {
+  margin-left: 210px;
+  width: 82%;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 85px;
+  overflow: auto;
+  border-radius:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 0px 1px black inset;
+  z-index: 999;
+}
+
+/* The side navigation menu */
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 97%;
+    overflow: auto;
+    border-radius:10px;
+    box-shadow: 0px 0px 0px 1px black inset;
+  }
+  
+  /* Sidebar links */
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  .sidebar #sidebarOverviewItems {
+    list-style-type: disc;
+    padding-left: 36px;
+    text-align: auto;
+  }
+  
+  .sidebar #sidebarOverviewHeading {
+    padding-inline-start: .65rem;
+    padding-bottom: 0px;
+
+  }
+
+
+  /* Active/current link */
+  .sidebar a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Links on mouse-over */
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  div.main {
+    width: 80%;
+    max-width: 1920px;
+    height: 100%;
+    position: relative;
+    padding-left: 1.5rem;
+    padding-top: 7.5rem;
+  }
+
+  /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px; 
+  }
+
+  .indexOverview, .groupOverview {
+    padding: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-gap: 2.5rem;
+    border-radius:10px;
+  }
+
+  .groups, .todoLists{
+    background-color: #B9DCDC;
+    padding-left: 1.5rem;
+    border-radius:10px;
+    /*outline: 2px solid black;*/
+    box-shadow: 0px 0px 0px 1px black inset;
+  }
+
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar */
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+
+    .topbar{
+      display: none;
+    }
+  }
+  
+  /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+
+footer {
+  text-align: center;
+  margin-left: 210px;
+  padding: 1px 16px;
+  background-color: #B9DCDC;
+  color: black;
+  border-radius:10px;
+  border: 1px solid black;
+}
+
+
+form {
+  background-color: #B9DCDC;
+  max-width: 600px;
+  padding: 30px;
+  border-radius:10px;
+  border: 1px solid black;
+}
+
+form label {
+  font-size: 16px;
+  padding-top: 6px;
+  display: block;
+}
+
+form #id_description {
+  width: 100%;
+  overflow: auto;
+  resize: both !important;
+  height: 25px;
+}
+
+.formContent {
+  margin-top: 9rem;
+}
+
+table {
+  border-spacing: 15px 15px;
+}
+
+
+td {
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 7px;
+  background-color: #B9DCDC;
+  border-radius:10px;
+}
+
+.stat li {
+  width: 150px;
+  text-align: center;
+  border: 1px solid black;
+  padding: 7px;
+  background-color: #B9DCDC;
+  border-radius:10px;
+  list-style-type: none;
+  margin: 1em;
+}

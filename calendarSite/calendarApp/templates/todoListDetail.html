@@ -6,18 +6,25 @@
         <div class="formContent">
         <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
             <p>This TodoList belongs to <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></b> </p>
-            {% if todoItems %}
-                <h2>TodoItems in List {{ todoList.name }}</h2>
 
-                <ul>
-                    {% for todoItem in todoItems %}
-                    <li><a href="/{{group.name}}/{{todoList.name}}/{{todoItem.name}}">{{ todoItem.name }}
-                        {% if todoItem.deadline%} (Deadline: {{todoItem.deadline}}) {% endif %}</a></li>
-                    {% endfor %}
-                </ul>
-
-                {% else %}
-                <p>There is no todoItems for this todoLists</p>
+            {% if todoItems%}
+            <h2>Items in {{ todoList.name }}</h2>
+            <table id="myTable">
+                <tr>
+                    <th id="name"><u>Name</u></th>
+                    <th id="importanceLevel"><u>Importance Level</u></th>
+                    <th id="deadline"><u>Deadline</u></th>
+                </tr>         
+            {% for todoItem in todoItems %}
+                <tr>
+                    <td><a href="/{{todoItem.todoList.group}}/{{todoItem.todoList}}/{{todoItem.name}}">{{todoItem.name}}</a></td>
+                    <td>{{todoItem.importanceLevel}}</td>
+                    <td>{{todoItem.deadline}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+            {% else %}
+                <p>You have no todoITem items in this List.</p>
             {% endif %}
 
             <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
@@ -28,36 +35,4 @@
     </div>
 
 </div>
-{% endblock %}
-{% block javascript %}
-    <script>
-        $("#delete").click(function () {
-            if (window.confirm("Are you sure that you want to delete?")){
-c
-
-                var name = $("#name").text();
-
-                $.ajax({
-                    url: "/ajax/delete",
-                    data: {
-                        "name": name,
-                        "type": "todoList",
-                    },
-                    dataType: "json",
-                    success: function(data){
-                        if (data.isDeleted){
-                            $(".detail").remove()
-
-                            g = document.createElement('p');
-                            g.setAttribute("class", "formContent");
-                            g.innerHTML = "This TodoList is deleted";
-                            
-                            $(".content").append(g);
-
-                        }
-                    }
-                })
-            }
-        });
-    </script>
 {% endblock %}

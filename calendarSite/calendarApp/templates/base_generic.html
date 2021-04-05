@@ -1,13 +1,18 @@
-{% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'calendarApp/style.css' %}">
+
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>Calendar App</title>{% endblock %}
-  <!--<link rel="shortcut icon" href="% static 'calendarApp/favicon.ico' %}"/>-->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    
+
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'calendarApp/style.css' %}">
+    
+    {% block title %}<title>Calendar App</title>{% endblock %}
+    <!--<link rel="shortcut icon" href="% static 'calendarApp/favicon.ico' %}"/>-->
 </head>
 <body>
 
@@ -52,13 +57,15 @@
     {% endblock %}
     {% block sidebar %}<!-- insert default sidebar text for every page -->{% endblock %}
     {% block content %}{% endblock %}
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
     {% block javascript %}{% endblock %}
 
 <footer>
     <p>&copy Lee, McClintock, & McCraney 2021</p>
 </footer>
+
+{% load static %}
+<script src="{% static 'calendarApp/script.js' %}"></script> 
 
 </body>
 </html>
