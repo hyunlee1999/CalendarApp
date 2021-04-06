@@ -64,6 +64,7 @@ $("#importanceLevel").click(function() {
 })
 
 $("#name").click(function() {
+    alert("name is running");
     if (isNameDescending){
         sortTable("name", 0, true);
         isNameDescending = false;
@@ -74,6 +75,7 @@ $("#name").click(function() {
 })
 
 $("#deadline").click(function() {
+    alert("deadline is running");
     if (isDeadlineDescending){
         sortTable("deadline", 2, true);
         isDeadlineDescending = false;

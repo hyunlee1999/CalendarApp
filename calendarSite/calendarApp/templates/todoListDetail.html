@@ -4,14 +4,14 @@
 <div class="content">
     <div class="detail">
         <div class="formContent">
-        <h2>TodoList <span id="name">{{ todoList.name }}<span></h2>
+        <h2>TodoList {{ todoList.name }}</h2>
             <p>This TodoList belongs to <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></b> </p>
 
             {% if todoItems%}
             <h2>Items in {{ todoList.name }}</h2>
             <table id="myTable">
                 <tr>
-                    <th id="name"><u>Name</u></th>
+                    <th id="listName"><u>Name</u></th>
                     <th id="importanceLevel"><u>Importance Level</u></th>
                     <th id="deadline"><u>Deadline</u></th>
                 </tr>         
