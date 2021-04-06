@@ -8,9 +8,10 @@
         {% csrf_token %}
         {{ form }}
         <br><br>
-        <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <input type="submit" value="Submit">
     </form>
     </div>
+    <br><br>
+    <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
 </div>
 {% endblock %}
