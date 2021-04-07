@@ -24,9 +24,16 @@ class GroupForm(forms.Form):
 
         return cleanedData
 
-class TodoListForm(forms.Form):        
-    parent= forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.all())
-    name = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
+class TodoListForm(forms.Form):
+
+    #Make the form accept user parameter
+    def __init__(self, user, *args, **kwargs):
+        super(TodoListForm, self).__init__(*args, **kwargs)  
+
+        #Filtering ModelChoiceField by the user
+        self.fields["parent"] = forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.filter(user=user))
+        self.fields["name"] = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
+
     previousParent = forms.CharField(widget=forms.HiddenInput(), required=False)
     previousName = forms.CharField(widget=forms.HiddenInput(), required=False)
 
@@ -48,11 +55,18 @@ class TodoListForm(forms.Form):
 
         
 class TodoItemForm(forms.Form):
-    parent= forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.all()) 
-    name = forms.CharField(label="Todo Item Name:", max_length=100, validators=[validate_name])
-    importanceLevel = forms.ChoiceField(label="Importance Level", choices=[(x, x) for x in range(4)])
-    deadline = forms.DateField(widget = forms.SelectDateWidget(), label="(Optional) Deadline:", required=False)
-    description = forms.CharField(label="(Optional) Description:", max_length=200, required=False)
+
+    #Make the form accept user parameter
+    def __init__(self, user, *args, **kwargs):
+        super(TodoItemForm, self).__init__(*args, **kwargs)  
+
+        #Filtering ModelChoiceField by the user
+        self.fields["parent"] = forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.filter(user=user)) 
+        self.fields["name"] = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
+        self.fields["importanceLevel"] = forms.ChoiceField(label="Importance Level", choices=[(x, x) for x in range(4)])
+        self.fields["deadline"] = forms.DateField(widget = forms.SelectDateWidget(), label="(Optional) Deadline:", required=False)
+        self.fields["description"] = forms.CharField(label="(Optional) Description:", max_length=200, required=False)
+
     previousParent = forms.CharField(widget=forms.HiddenInput(), required=False)
     previousName = forms.CharField(widget=forms.HiddenInput(), required=False)
 

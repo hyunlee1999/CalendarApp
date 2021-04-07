@@ -36,7 +36,7 @@ urlpatterns = [
     path("signup", views.signup, name="signup"),
     path("login", auth_views.LoginView.as_view(template_name="login.html"), {'next_page': '/'}, name="login"),
     path("logout", views.logout_view, name='logout'),
-
+    path("demo", views.demo, name="demo"),
     #Ajax Requests
     path("ajax/delete", views.delete, name="delete"),
     path("ajax/completed", views.completed, name="completed"),

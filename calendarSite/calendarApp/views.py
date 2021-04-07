@@ -58,7 +58,7 @@ def makeNewTodoList(request, group=None):
         initial_dict = {}
 
     if request.method == "POST":
-        form = TodoListForm(request.POST, initial=initial_dict)
+        form = TodoListForm(request.user, request.POST, initial=initial_dict)
 
         if form.is_valid():
             newTodoList = TodoList()
@@ -70,7 +70,7 @@ def makeNewTodoList(request, group=None):
             return redirect("/%s/%s" % (parentGroup, newTodoList.name))
 
     else:
-        form = TodoListForm(initial=initial_dict)
+        form = TodoListForm(request.user, initial=initial_dict)
 
     return render(request, "makeNewTodoList.html", {"form": form})
 
@@ -93,7 +93,7 @@ def makeNewTodoItem(request, group=None, todoList=None):
         }
 
     if request.method == "POST":
-        form = TodoItemForm(request.POST)
+        form = TodoItemForm(request.user, request.POST)
 
         if form.is_valid():
             newTodoItem = TodoItem()
@@ -110,7 +110,7 @@ def makeNewTodoItem(request, group=None, todoList=None):
 
 
     else:
-        form = TodoItemForm(initial=initial_dict)
+        form = TodoItemForm(request.user, initial=initial_dict)
 
     return render(request, "makeNewTodoItem.html", {"form": form})
 
@@ -190,8 +190,6 @@ def delete(request):
 
     elif (type == "todoList"):
         groupName = request.GET.get("groupName")
-        print(type, name, groupName)
-
         group = Group.objects.all().get(name= groupName, user=request.user)
 
 
@@ -205,7 +203,13 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoItem"):
-        object = TodoItem.objects.all().get(name = name, user=request.user)
+        groupName = request.GET.get("groupName")
+        group = Group.objects.all().get(name= groupName, user=request.user)
+
+        todoListName = request.GET.get("todoListName")
+        todoList = TodoList.objects.all().get(name= todoListName, user=request.user, group= group)
+
+        object = TodoItem.objects.all().get(name = name, user=request.user, todoList=todoList)
         object.delete()
     
     data = {
@@ -282,7 +286,7 @@ def editTodoList(request, group_, todoList_):
 
     if request.method == "POST":
 
-        form = TodoListForm(request.POST, initial=initial_dict)
+        form = TodoListForm(request.user, request.POST, initial=initial_dict)
 
         if form.is_valid():
             previousName = form.cleaned_data["previousName"]
@@ -298,7 +302,7 @@ def editTodoList(request, group_, todoList_):
     else:
         group =  get_object_or_404(Group, name=group_, user=request.user)
         todoList = get_object_or_404(TodoList, name=todoList_, group=group, user=request.user)
-        form = TodoListForm(initial=initial_dict)
+        form = TodoListForm(request.user, initial=initial_dict)
 
     return render(request, "editTodoList.html", {"form": form, "group": todoList.group, "name": todoList.name})
 
@@ -322,7 +326,7 @@ def editTodoItem(request, group_, todoList_, todoItem_):
 
     if request.method == "POST":
 
-        form = TodoItemForm(request.POST, initial=initial_dict)
+        form = TodoItemForm(request.user, request.POST, initial=initial_dict)
 
         if form.is_valid():
             previousName = form.cleaned_data["previousName"]
@@ -341,7 +345,7 @@ def editTodoItem(request, group_, todoList_, todoItem_):
             
     else:
 
-        form = TodoItemForm(initial=initial_dict)
+        form = TodoItemForm(request.user, initial=initial_dict)
 
     return render(request, "editTodoItem.html", {"form": form, "group": todoList.group, "todoList": todoList.name, "name": todoItem.name})
 
@@ -365,6 +369,11 @@ def signup(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+def demo(request):
+    user = authenticate(username="Demo", password="bsctaskmanager")
+    login(request, user)
+    return redirect("/")
 
 
 

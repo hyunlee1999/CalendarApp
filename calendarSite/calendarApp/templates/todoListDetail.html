@@ -42,13 +42,14 @@
             if (window.confirm("Are you sure that you want to delete?")){
 
                 var name = $("#todoListName").text();
+                var groupName = $("#groupName").text();
 
                 $.ajax({
                     url: "/ajax/delete",
                     data: {
                         "name": name,
                         "type": "todoList",
-                        "group": $("#groupName").text(),
+                        "groupName": groupName,
                     },
                     dataType: "json",
                     success: function(data){

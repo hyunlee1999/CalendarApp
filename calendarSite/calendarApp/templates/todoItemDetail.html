@@ -5,8 +5,8 @@
     <div class="detail">
         <div class="formContent">
         <h2>TodoItem <span id="name">{{ todoItem.name }}<span></h2>
-        <p>This TodoItem belongs to Group <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></p></b>
-        <p>This TodoItem belongs to TodoList<b><a href="/{{group.name}}/{{todoList.name}}"><span> {{ todoList.name }}</span></a></b> </p>
+        <p>This TodoItem belongs to Group <b><a href="/{{group.name}}"><span id="groupName">{{ group.name }}</span></a></p></b>
+        <p>This TodoItem belongs to TodoList <b><a href="/{{group.name}}/{{todoList.name}}"><span id="todoListName">{{ todoList.name }}</span></a></b> </p>
         <p>Importance Level: {{todoItem.importanceLevel}}</p>
         <p>Deadline: <span> {{todoItem.deadline}}</span></p>
 
@@ -40,11 +40,16 @@
             if (window.confirm("Are you sure that you want to delete?")){
 
                 var name = $("#name").text();
+                var groupName = $("#groupName").text();
+                var todoListName = $("#todoListName").text();
+
                 $.ajax({
                     url: "/ajax/delete",
                     data: {
                         "name": name,
                         "type": "todoItem",
+                        "groupName": groupName,
+                        "todoListName": todoListName,
                     },
                     dataType: "json",
                     success: function(data){
