@@ -7,7 +7,7 @@ def count(request):
         return {
             'num_Group': Group.objects.filter(user=request.user).count(),
             'num_TodoList': TodoList.objects.filter(user=request.user).count(),
-            'num_TodoItem': TodoItem.objects.filter(user=request.user).count(),
+            'num_TodoItem': TodoItem.objects.filter(user=request.user, completed=False).count(),
         }
     else:
         return {
