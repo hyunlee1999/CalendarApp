@@ -3,15 +3,23 @@
 {% block content %}
 <div class="content">
     <div class='formContent'>
-    <h2>Signup</h2>
-    <form action="/signup" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <h2>Login</h2>
+
+    {% if not user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <br><br>
+            <input type="submit" value="Login">
+        </form>
+
+        <p>Don't have an account? <a href="signup"><u>Click here</u></a> to create an account!</p>
+    {% else %}
+    <p>Hi {{user.first_name}}, you are already logged in!</p>
+
+    {% endif %}
     </div>
-    <br><br>
-    <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
+<br><br>
 </div>
+
 {% endblock %}

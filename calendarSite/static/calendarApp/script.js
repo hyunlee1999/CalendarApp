@@ -1,5 +1,5 @@
 var isImportanceDescending = false;
-var isNameDescending = false;
+var isListNameDescending = false;
 var isDeadlineDescending = false;
 
 function sortTable(column, index, isDescending) {
@@ -24,12 +24,12 @@ function sortTable(column, index, isDescending) {
                     shouldSwitch = true;
                     break;
                 }
-            } else if (column == "name" && !isDescending){
+            } else if (column == "listName" && !isDescending){
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
                 }
-            }  else if (column == "name" && isDescending){
+            }  else if (column == "listName" && isDescending){
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
@@ -63,19 +63,17 @@ $("#importanceLevel").click(function() {
     }
 })
 
-$("#name").click(function() {
-    alert("name is running");
-    if (isNameDescending){
-        sortTable("name", 0, true);
-        isNameDescending = false;
+$("#listName").click(function() {
+    if (isListNameDescending){
+        sortTable("listName", 0, true);
+        isListNameDescending = false;
     } else {
-        sortTable("name", 0, false);
-        isNameDescending = true;
+        sortTable("listName", 0, false);
+        isListNameDescending = true;
     }
 })
 
 $("#deadline").click(function() {
-    alert("deadline is running");
     if (isDeadlineDescending){
         sortTable("deadline", 2, true);
         isDeadlineDescending = false;

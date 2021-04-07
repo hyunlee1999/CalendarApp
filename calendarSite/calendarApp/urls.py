@@ -1,4 +1,6 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
+
 
 from . import views
 
@@ -32,13 +34,12 @@ urlpatterns = [
     path("completed", views.completedItems, name="completedItems"),
     path("uncompleted", views.uncompletedItems, name="uncompletedItems"),
     path("signup", views.signup, name="signup"),
-    path("login", views.login, name="login"),
-
+    path("login", auth_views.LoginView.as_view(template_name="login.html"), {'next_page': '/'}, name="login"),
+    path("logout", views.logout_view, name='logout'),
 
     #Ajax Requests
     path("ajax/delete", views.delete, name="delete"),
     path("ajax/completed", views.completed, name="completed"),
     path("ajax/uncompleted", views.uncompleted, name="uncompleted"),
-
 
 ]

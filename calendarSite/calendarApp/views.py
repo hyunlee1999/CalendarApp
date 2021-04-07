@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from .models import Group, TodoList, TodoItem
 from .forms import GroupForm, TodoListForm, TodoItemForm, SignUpForm
 from django.http import JsonResponse
@@ -9,6 +10,8 @@ from django.shortcuts import redirect, render
 import datetime
 
 
+
+@login_required
 def index(request):
     groups = Group.objects.all()
     todoLists = TodoList.objects.all()
@@ -22,6 +25,7 @@ def index(request):
 
     return render(request, "index.html", context=context)
 
+@login_required
 def makeNewGroup(request):
     if request.method == "POST":
         form = GroupForm(request.POST)
@@ -38,6 +42,7 @@ def makeNewGroup(request):
 
     return render(request, "makeNewGroup.html", {"form": form})
 
+@login_required
 def makeNewTodoList(request, group=None):
 
     groupList = Group.objects.all()
@@ -67,6 +72,7 @@ def makeNewTodoList(request, group=None):
 
     return render(request, "makeNewTodoList.html", {"form": form})
 
+@login_required
 def makeNewTodoItem(request, group=None, todoList=None):
 
     if group != None:
@@ -105,12 +111,14 @@ def makeNewTodoItem(request, group=None, todoList=None):
 
     return render(request, "makeNewTodoItem.html", {"form": form})
 
+@login_required
 def groupDetail(request, group):
     group = get_object_or_404(Group, name=group)
     childLists = TodoList.objects.all().filter(group=group)
     todoItems = TodoItem.objects.all().filter(completed=False)
     return render(request, "groupDetail.html", {"group": group, "todoLists": childLists, "todoItems": todoItems})
-    
+
+@login_required   
 def todoListDetail(request, group, todoList):
     group = get_object_or_404(Group, name=group)
     todoList = get_object_or_404(TodoList, name=todoList, group=group)
@@ -118,17 +126,20 @@ def todoListDetail(request, group, todoList):
         
     return render(request, "todoListDetail.html", {"group": group, "todoList": todoList, "todoItems": childItems})
 
+@login_required
 def todoItemDetail(request, group, todoList, todoItem):
     group = get_object_or_404(Group, name=group)
     todoList = get_object_or_404(TodoList, name=todoList, group=group)
     todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
     return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
 
+@login_required
 def uncompletedItems(request):
     todoItems = TodoItem.objects.all().filter(completed=False)
     
     return render(request, "uncompletedItems.html", {"todoItems": todoItems})
 
+@login_required
 def completedItems(request):
     todoItems = TodoItem.objects.all().filter(completed=True)
 
@@ -159,6 +170,7 @@ def completedItems(request):
             "yearCount": yearCount,
         })
 
+@login_required
 def delete(request):
     type = request.GET.get("type")
     name = request.GET.get("name")
@@ -193,6 +205,7 @@ def delete(request):
 
     return JsonResponse(data)
 
+@login_required
 def completed(request):
     name = request.GET.get("name")
    
@@ -205,6 +218,7 @@ def completed(request):
     
     return JsonResponse(data)
 
+@login_required
 def uncompleted(request):
     name = request.GET.get("name")
    
@@ -217,7 +231,7 @@ def uncompleted(request):
     
     return JsonResponse(data)
 
-
+@login_required
 def editGroup(request, group_):
 
     if request.method == "POST":
@@ -247,7 +261,7 @@ def editGroup(request, group_):
 
     return render(request, "editGroup.html", {"form": form, "group": group.name})
 
-
+@login_required
 def editTodoList(request, group_, todoList_):
 
     initial_dict = {
@@ -280,6 +294,7 @@ def editTodoList(request, group_, todoList_):
     return render(request, "editTodoList.html", {"form": form, "group": todoList.group, "name": todoList.name})
 
 
+@login_required
 def editTodoItem(request, group_, todoList_, todoItem_):
 
     group = get_object_or_404(Group, name=group_)
@@ -336,5 +351,11 @@ def signup(request):
         form = SignUpForm()
 
     return render(request, 'signup.html', {'form': form})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("login")
+
 
 
