@@ -14,8 +14,8 @@ import datetime
 @login_required
 def index(request):
     groups = Group.objects.filter(user=request.user)
-    todoLists = TodoList.objects.all()
-    todoItems = TodoItem.objects.all()
+    todoLists = TodoList.objects.filter(user=request.user)
+    todoItems = TodoItem.objects.filter(user=request.user)
 
     context = {
         "groups": groups,
@@ -33,6 +33,7 @@ def makeNewGroup(request):
         if form.is_valid():
             newGroup = Group()
             newGroup.name = form.cleaned_data["name"]
+            newGroup.user = request.user
             newGroup.save()
 
             return redirect("/%s/" % newGroup.name)
@@ -45,12 +46,12 @@ def makeNewGroup(request):
 @login_required
 def makeNewTodoList(request, group=None):
 
-    groupList = Group.objects.all()
+    #groupList = Group.objects.all()
 
     if group != None:
         
         initial_dict = {
-            "parent": Group.objects.get(name=group),
+            "parent": Group.objects.get(name=group, user=request.user),
         }
 
     else:
@@ -61,9 +62,10 @@ def makeNewTodoList(request, group=None):
 
         if form.is_valid():
             newTodoList = TodoList()
-            parentGroup = Group.objects.get(name=form.cleaned_data["parent"]) 
+            parentGroup = Group.objects.get(name=form.cleaned_data["parent"], user=request.user) 
             newTodoList.group = parentGroup
             newTodoList.name = form.cleaned_data["name"]
+            newTodoList.user = request.user
             newTodoList.save()
             return redirect("/%s/%s" % (parentGroup, newTodoList.name))
 
@@ -77,8 +79,8 @@ def makeNewTodoItem(request, group=None, todoList=None):
 
     if group != None:
 
-        group =  Group.objects.get(name=group)
-        todoList = TodoList.objects.get(name=todoList, group=group)
+        group =  Group.objects.get(name=group, user=request.user)
+        todoList = TodoList.objects.get(name=todoList, group=group, user=request.user)
         
         initial_dict = {
             "parent": todoList,
@@ -95,13 +97,14 @@ def makeNewTodoItem(request, group=None, todoList=None):
 
         if form.is_valid():
             newTodoItem = TodoItem()
-            parentList = TodoList.objects.get(name=form.cleaned_data["parent"]) 
+            parentList = TodoList.objects.get(name=form.cleaned_data["parent"], user=request.user) 
             newTodoItem.todoList = parentList
             newTodoItem.name = form.cleaned_data["name"]
             newTodoItem.deadline = form.cleaned_data["deadline"]
             newTodoItem.description = form.cleaned_data["description"]
             newTodoItem.importanceLevel = form.cleaned_data["importanceLevel"]
             newTodoItem.completed = False
+            newTodoItem.user = request.user
             newTodoItem.save()
             return redirect("/%s/%s/%s" % (parentList.group, parentList.name, newTodoItem.name))
 
@@ -113,35 +116,35 @@ def makeNewTodoItem(request, group=None, todoList=None):
 
 @login_required
 def groupDetail(request, group):
-    group = get_object_or_404(Group, name=group)
-    childLists = TodoList.objects.all().filter(group=group)
-    todoItems = TodoItem.objects.all().filter(completed=False)
+    group = get_object_or_404(Group, name=group, user=request.user)
+    childLists = TodoList.objects.all().filter(group=group, user=request.user)
+    todoItems = TodoItem.objects.all().filter(completed=False, user=request.user)
     return render(request, "groupDetail.html", {"group": group, "todoLists": childLists, "todoItems": todoItems})
 
 @login_required   
 def todoListDetail(request, group, todoList):
-    group = get_object_or_404(Group, name=group)
-    todoList = get_object_or_404(TodoList, name=todoList, group=group)
-    childItems = TodoItem.objects.all().filter(todoList = todoList, completed=False)
+    group = get_object_or_404(Group, name=group, user=request.user)
+    todoList = get_object_or_404(TodoList, name=todoList, group=group, user=request.user)
+    childItems = TodoItem.objects.all().filter(todoList = todoList, completed=False, user=request.user)
         
     return render(request, "todoListDetail.html", {"group": group, "todoList": todoList, "todoItems": childItems})
 
 @login_required
 def todoItemDetail(request, group, todoList, todoItem):
-    group = get_object_or_404(Group, name=group)
-    todoList = get_object_or_404(TodoList, name=todoList, group=group)
-    todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList)
+    group = get_object_or_404(Group, name=group, user=request.user)
+    todoList = get_object_or_404(TodoList, name=todoList, group=group, user=request.user)
+    todoItem = get_object_or_404(TodoItem, name=todoItem, todoList=todoList, user=request.user)
     return render(request, "todoItemDetail.html", {"group": group, "todoList": todoList, "todoItem": todoItem})
 
 @login_required
 def uncompletedItems(request):
-    todoItems = TodoItem.objects.all().filter(completed=False)
+    todoItems = TodoItem.objects.all().filter(completed=False, user=request.user)
     
     return render(request, "uncompletedItems.html", {"todoItems": todoItems})
 
 @login_required
 def completedItems(request):
-    todoItems = TodoItem.objects.all().filter(completed=True)
+    todoItems = TodoItem.objects.all().filter(completed=True, user=request.user)
 
     today = datetime.date.today()
     week = today - datetime.timedelta(days=7)
@@ -174,9 +177,10 @@ def completedItems(request):
 def delete(request):
     type = request.GET.get("type")
     name = request.GET.get("name")
+    print(name)
     if (type == "group"):
 
-        object = Group.objects.all().get(name = name)
+        object = Group.objects.all().get(name = name, user=request.user)
         object.delete()
 
         data = {
@@ -186,7 +190,7 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoList"):
-        object = TodoList.objects.all().get(name = name)
+        object = TodoList.objects.all().get(name = name, user=request.user)
         object.delete()
 
         data = {
@@ -196,7 +200,7 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoItem"):
-        object = TodoItem.objects.all().get(name = name)
+        object = TodoItem.objects.all().get(name = name, user=request.user)
         object.delete()
     
     data = {
@@ -209,7 +213,7 @@ def delete(request):
 def completed(request):
     name = request.GET.get("name")
    
-    object = TodoItem.objects.all().get(name = name)
+    object = TodoItem.objects.all().get(name = name, user=request.user)
     object.completedDate = datetime.date.today()
     object.completed = True
     object.save()
@@ -222,7 +226,7 @@ def completed(request):
 def uncompleted(request):
     name = request.GET.get("name")
    
-    object = TodoItem.objects.all().get(name = name)
+    object = TodoItem.objects.all().get(name = name, user=request.user)
     object.completed = False
     object.completedDate = None
     object.save()
@@ -244,7 +248,7 @@ def editGroup(request, group_):
 
         if form.is_valid():
             groupName = form.cleaned_data["previous"]
-            group = get_object_or_404(Group, name=groupName)
+            group = get_object_or_404(Group, name=groupName, user=request.user)
             group.name =  form.cleaned_data["name"]
             group.save()
 
@@ -256,7 +260,7 @@ def editGroup(request, group_):
             "previous": group_,
         }
 
-        group = get_object_or_404(Group, name=group_)
+        group = get_object_or_404(Group, name=group_, user=request.user)
         form = GroupForm(initial=initial_dict)
 
     return render(request, "editGroup.html", {"form": form, "group": group.name})
@@ -266,7 +270,7 @@ def editTodoList(request, group_, todoList_):
 
     initial_dict = {
         "name": todoList_,
-        "parent": get_object_or_404(Group, name=group_),
+        "parent": get_object_or_404(Group, name=group_, user=request.user),
         "previousParent": group_,
         "previousName": todoList_,
     }
@@ -278,17 +282,17 @@ def editTodoList(request, group_, todoList_):
         if form.is_valid():
             previousName = form.cleaned_data["previousName"]
             previousParent = form.cleaned_data["previousParent"]
-            previousParent = get_object_or_404(Group, name=previousParent)
-            todoList = get_object_or_404(TodoList, name=previousName, group=previousParent)
+            previousParent = get_object_or_404(Group, name=previousParent, user=request.user)
+            todoList = get_object_or_404(TodoList, name=previousName, group=previousParent, user=request.user)
             todoList.name =  form.cleaned_data["name"]
-            todoList.group = get_object_or_404(Group, name=form.cleaned_data["parent"])
+            todoList.group = get_object_or_404(Group, name=form.cleaned_data["parent"], user=request.user)
             todoList.save()
 
             return redirect("/%s/%s" % (todoList.group, todoList.name))
             
     else:
-        group =  get_object_or_404(Group, name=group_)
-        todoList = get_object_or_404(TodoList, name=todoList_, group=group)
+        group =  get_object_or_404(Group, name=group_, user=request.user)
+        todoList = get_object_or_404(TodoList, name=todoList_, group=group, user=request.user)
         form = TodoListForm(initial=initial_dict)
 
     return render(request, "editTodoList.html", {"form": form, "group": todoList.group, "name": todoList.name})
@@ -297,9 +301,9 @@ def editTodoList(request, group_, todoList_):
 @login_required
 def editTodoItem(request, group_, todoList_, todoItem_):
 
-    group = get_object_or_404(Group, name=group_)
-    todoList = get_object_or_404(TodoList, name=todoList_, group= group)
-    todoItem = get_object_or_404(TodoItem, name=todoItem_, todoList = todoList)
+    group = get_object_or_404(Group, name=group_, user=request.user)
+    todoList = get_object_or_404(TodoList, name=todoList_, group= group, user=request.user)
+    todoItem = get_object_or_404(TodoItem, name=todoItem_, todoList = todoList, user=request.user)
 
     initial_dict = {
         "name": todoItem.name,
@@ -318,8 +322,8 @@ def editTodoItem(request, group_, todoList_, todoItem_):
         if form.is_valid():
             previousName = form.cleaned_data["previousName"]
             previousParent = form.cleaned_data["previousParent"]
-            previousParent = get_object_or_404(TodoList, name=previousParent)
-            todoItem = get_object_or_404(TodoItem, name=previousName, todoList=previousParent)
+            previousParent = get_object_or_404(TodoList, name=previousParent, user=request.user)
+            todoItem = get_object_or_404(TodoItem, name=previousName, todoList=previousParent, user=request.user)
             todoItem.name =  form.cleaned_data["name"]
             todoItem.todoList = get_object_or_404(TodoList, name=form.cleaned_data["parent"])
             todoItem.description = form.cleaned_data["description"]

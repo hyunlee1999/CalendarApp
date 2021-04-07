@@ -5,7 +5,7 @@
     <div class="detail">
         <div class="formContent">
         {% if todoLists %}
-        <h2>TodoLists in Group {{ group.name }}</h2>
+        <h2>TodoLists in Group <span id="groupName">{{ group.name }}</span></h2>
             <div class="groupOverview">
                 {% for todoList in todoLists %}
                 <div class="todoLists">
@@ -46,8 +46,7 @@
         $("#delete").click(function () {
             if (window.confirm("Are you sure that you want to delete?")){
 
-                var name = $("#name").text();
-                console.log(name);
+                var name = $("#groupName").text();
 
                 $.ajax({
                     url: "/ajax/delete",
