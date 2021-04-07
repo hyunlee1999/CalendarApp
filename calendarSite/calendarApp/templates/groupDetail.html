@@ -4,8 +4,9 @@
 <div class="content">
     <div class="detail">
         <div class="formContent">
-        {% if todoLists %}
         <h2>TodoLists in Group <span id="groupName">{{ group.name }}</span></h2>
+
+        {% if todoLists %}
             <div class="groupOverview">
                 {% for todoList in todoLists %}
                 <div class="todoLists">

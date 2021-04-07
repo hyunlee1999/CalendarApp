@@ -177,7 +177,6 @@ def completedItems(request):
 def delete(request):
     type = request.GET.get("type")
     name = request.GET.get("name")
-    print(name)
     if (type == "group"):
 
         object = Group.objects.all().get(name = name, user=request.user)
@@ -190,7 +189,13 @@ def delete(request):
         return JsonResponse(data)
 
     elif (type == "todoList"):
-        object = TodoList.objects.all().get(name = name, user=request.user)
+        groupName = request.GET.get("groupName")
+        print(type, name, groupName)
+
+        group = Group.objects.all().get(name= groupName, user=request.user)
+
+
+        object = TodoList.objects.all().get(group= group, name = name, user=request.user)
         object.delete()
 
         data = {

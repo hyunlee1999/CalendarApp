@@ -4,11 +4,10 @@
 <div class="content">
     <div class="detail">
         <div class="formContent">
-        <h2>TodoList {{ todoList.name }}</h2>
-            <p>This TodoList belongs to <b><a href="/{{group.name}}"><span> {{ group.name }}</span></a></b> </p>
-
+        <h2>TodoList <span id="todoListName">{{ todoList.name }}</span></h2>
+            <p>This TodoList belongs to <b><a href="/{{group.name}}"><span id="groupName">{{ group.name }}</span></a></b> </p>
+            <h2>Items in this list</span></h2>
             {% if todoItems%}
-            <h2>Items in {{ todoList.name }}</h2>
             <table id="myTable">
                 <tr>
                     <th id="listName"><u>Name</u></th>
@@ -24,7 +23,7 @@
             {% endfor %}
             </table>
             {% else %}
-                <p>You have no todoITem items in this List.</p>
+                <p>You have no items in this List.</p>
             {% endif %}
 
             <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
@@ -35,4 +34,38 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $("#delete").click(function () {
+            if (window.confirm("Are you sure that you want to delete?")){
+
+                var name = $("#todoListName").text();
+
+                $.ajax({
+                    url: "/ajax/delete",
+                    data: {
+                        "name": name,
+                        "type": "todoList",
+                        "group": $("#groupName").text(),
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if (data.isDeleted){
+                            $(".detail").remove()
+
+                            g = document.createElement('p');
+                            g.setAttribute("class", "formContent");
+                            g.innerHTML = "This TodoList is deleted";
+                            
+                            $(".content").append(g);
+
+                        }
+                    }
+                })
+
+            }
+        });
+    </script>
 {% endblock %}
