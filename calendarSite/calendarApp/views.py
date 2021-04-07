@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
 from .models import Group, TodoList, TodoItem
-from .forms import GroupForm, TodoListForm, TodoItemForm
+from .forms import GroupForm, TodoListForm, TodoItemForm, SignUpForm
 from django.http import JsonResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 import datetime
 
 
@@ -318,3 +320,21 @@ def editTodoItem(request, group_, todoList_, todoItem_):
         form = TodoItemForm(initial=initial_dict)
 
     return render(request, "editTodoItem.html", {"form": form, "group": todoList.group, "todoList": todoList.name, "name": todoItem.name})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+
+    else:
+        form = SignUpForm()
+
+    return render(request, 'signup.html', {'form': form})
+
+

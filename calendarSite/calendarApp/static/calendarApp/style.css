@@ -220,3 +220,8 @@ td {
   list-style-type: none;
   margin: 1em;
 }
+
+/* Remove help text form signup sheets */
+.formContent .helptext {
+  display: none;
+}

@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="content">
+    <div class='formContent'>
+    <h2>Signup</h2>
+    <form action="/signup" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    <br><br>
+    <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
+</div>
+{% endblock %}

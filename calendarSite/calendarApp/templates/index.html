@@ -5,7 +5,9 @@
 
 <div class="content">
   <div class="main">
-    
+    {% if user.is_authenticated %}
+      <h2>Welcome {{user.first_name}}!</h2>
+    {% endif %}
 
     <h2>Group Overview</h2>
 

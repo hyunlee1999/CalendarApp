@@ -31,6 +31,8 @@ urlpatterns = [
     #complete/uncomplete    
     path("completed", views.completedItems, name="completedItems"),
     path("uncompleted", views.uncompletedItems, name="uncompletedItems"),
+    path("signup", views.signup, name="signup"),
+    path("login", views.login, name="login"),
 
 
     #Ajax Requests
