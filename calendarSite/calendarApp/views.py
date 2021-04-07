@@ -13,7 +13,7 @@ import datetime
 
 @login_required
 def index(request):
-    groups = Group.objects.all()
+    groups = Group.objects.filter(user=request.user)
     todoLists = TodoList.objects.all()
     todoItems = TodoItem.objects.all()
 
