@@ -28,7 +28,7 @@ def index(request):
 @login_required
 def makeNewGroup(request):
     if request.method == "POST":
-        form = GroupForm(request.POST)
+        form = GroupForm(request.user, request.POST)
 
         if form.is_valid():
             newGroup = Group()
@@ -39,7 +39,7 @@ def makeNewGroup(request):
             return redirect("/%s/" % newGroup.name)
 
     else:
-        form = GroupForm()
+        form = GroupForm(request.user)
 
     return render(request, "makeNewGroup.html", {"form": form})
 
@@ -253,7 +253,7 @@ def editGroup(request, group_):
             "previous": group_,
         }
 
-        form = GroupForm(request.POST, initial=initial_dict)
+        form = GroupForm(request.user, request.POST, initial=initial_dict)
 
         if form.is_valid():
             groupName = form.cleaned_data["previous"]
@@ -270,7 +270,7 @@ def editGroup(request, group_):
         }
 
         group = get_object_or_404(Group, name=group_, user=request.user)
-        form = GroupForm(initial=initial_dict)
+        form = GroupForm(request.user, initial=initial_dict)
 
     return render(request, "editGroup.html", {"form": form, "group": group.name})
 

@@ -18,9 +18,10 @@
         {% if todoItem.completed %}
             <p>This todoItem was completed on {{todoItem.completedDate}}</p>
         {% endif %}
-
-        <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
+        <button onclick="location.href='/add/{{group.name}}/{{todoList.name}}'">Add More Items</button>
         <button onclick="location.href='/edit/{{group.name}}/{{todoList.name}}/{{todoItem.name}}'">Edit TodoItem</button>
+        <br>
+        <button onclick="location.href='javascript:history.go(-1)' ">Previous Page</a></button>
         <button id="delete">Delete</button>
 
         {% if todoItem.completed == False %}

@@ -4,19 +4,24 @@ from django.core.exceptions import ValidationError
 from .validators import validate_name
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.admin import widgets                                       
 
 
 
 
 
 class GroupForm(forms.Form):
+    def __init__(self, user, *args, **kwargs):
+        super(GroupForm, self).__init__(*args, **kwargs)
+        self.user = user
+
     name = forms.CharField(label="Group Name", max_length=100, validators=[validate_name])
     previous = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     def clean(self):
         cleanedData = super(GroupForm, self).clean()
         nameCleaned = cleanedData.get("name")
-        if Group.objects.filter(name=nameCleaned).exists():
+        if Group.objects.filter(name=nameCleaned, user=self.user).exists():
             raise ValidationError ("Error: A  group with that name already exists")
 
         if "previous" in self.initial:
@@ -29,6 +34,7 @@ class TodoListForm(forms.Form):
     #Make the form accept user parameter
     def __init__(self, user, *args, **kwargs):
         super(TodoListForm, self).__init__(*args, **kwargs)  
+        self.user = user
 
         #Filtering ModelChoiceField by the user
         self.fields["parent"] = forms.ModelChoiceField(label = "Parent Group", queryset = Group.objects.filter(user=user))
@@ -41,7 +47,7 @@ class TodoListForm(forms.Form):
         cleanedData = super().clean()
         nameCleaned = cleanedData.get("name")
         parentCleaned = cleanedData.get("parent")
-        if TodoList.objects.filter(name=nameCleaned, group=parentCleaned).exists():
+        if TodoList.objects.filter(name=nameCleaned, group=parentCleaned, user=self.user).exists():
             error = "Error: A Todo List with that name already exists in group " + str(parentCleaned)
             raise ValidationError (error)
 
@@ -59,10 +65,11 @@ class TodoItemForm(forms.Form):
     #Make the form accept user parameter
     def __init__(self, user, *args, **kwargs):
         super(TodoItemForm, self).__init__(*args, **kwargs)  
+        self.user = user
 
         #Filtering ModelChoiceField by the user
         self.fields["parent"] = forms.ModelChoiceField(label = "Parent Todo List", queryset = TodoList.objects.filter(user=user)) 
-        self.fields["name"] = forms.CharField(label="Todo List Name", max_length=100, validators=[validate_name])
+        self.fields["name"] = forms.CharField(label="Todo Item Name", max_length=100, validators=[validate_name])
         self.fields["importanceLevel"] = forms.ChoiceField(label="Importance Level", choices=[(x, x) for x in range(4)])
         self.fields["deadline"] = forms.DateField(widget = forms.SelectDateWidget(), label="(Optional) Deadline:", required=False)
         self.fields["description"] = forms.CharField(label="(Optional) Description:", max_length=200, required=False)
@@ -74,7 +81,7 @@ class TodoItemForm(forms.Form):
         cleanedData = super().clean()
         nameCleaned = cleanedData.get("name")
         parentList = cleanedData.get("parent")
-        if TodoItem.objects.filter(name=nameCleaned, todoList=parentList).exists() and cleanedData.get("previousName") != cleanedData.get("name"):
+        if TodoItem.objects.filter(name=nameCleaned, todoList=parentList, user=self.user).exists() and cleanedData.get("previousName") != cleanedData.get("name"):
             raise ValidationError ("Error: A Todo Item with that name already exists in " + str(parentList) + " list")
 
         if "previousParent" in self.initial:
