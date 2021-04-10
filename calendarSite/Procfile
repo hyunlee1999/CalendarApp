@@ -1,1 +1,1 @@
-web: gunicorn <bsctaskmanager>.wsgi --log-file -
+web: gunicorn calendarApp.wsgi
