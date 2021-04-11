@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'calendarSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'bsctaskmanager',
-        'HOST': 'localhost',
+        'NAME': 'd8fscsqck2do6g',
+        'USER': 'vpaemzialutqhn',
+        'PASSWORD': 'c1a474e50abf16799c23ef7e8fbb82ffdb911a89c83987f384330785e70d1f68',
+        'HOST': 'ec2-54-205-183-19.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
