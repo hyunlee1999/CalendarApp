@@ -29,7 +29,7 @@ SECRET_KEY = 'u-6)8o4z$x(lr)10dz*qb$9=nb-b%8$pj74(%!gs*bmz!g3&ai'
 DEBUG = False
 
 ALLOWED_HOSTS = ["bsctaskmanager.com", '127.0.0.1', '.herokuapp.com']
-
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -80,11 +80,14 @@ WSGI_APPLICATION = 'calendarSite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'bsctaskmanager',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -126,6 +129,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "login"
+
+
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
