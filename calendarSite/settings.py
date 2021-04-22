@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'u-6)8o4z$x(lr)10dz*qb$9=nb-b%8$pj74(%!gs*bmz!g3&ai'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["bsctaskmanager.com", '127.0.0.1', '.herokuapp.com']
 #ALLOWED_HOSTS = []
